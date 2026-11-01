@@ -1,0 +1,45 @@
+---
+title: "Images and moving pictures"
+description: "A small demonstration of images, captions, and video in a post."
+date: 2026-10-29
+kind: writing
+tags: [learning, media]
+sample: true
+---
+
+import MediaFigure from '../../components/MediaFigure.astro';
+import Video from '../../components/Video.astro';
+import study from '../../assets/light-study.png';
+
+Some things are easier to show. An image can sit inside a piece of writing without turning the whole page into a gallery. A caption adds the bit of context that the picture cannot carry by itself.
+
+## An image with room to breathe
+
+The image below is an original geometric color study made for this development sample. It is not a photograph or a personal memory. On a larger screen, it extends slightly beyond the reading column. On a phone, it fits the page.
+
+<MediaFigure
+  src={study}
+  alt="A geometric color study: an olive circle, a rust rectangle, and pale horizontal lines against a cream background."
+  caption="Light study. An original geometric development asset, created for this site."
+  wide
+/>
+
+Local images are processed into responsive sizes during the build, so a smaller screen can request a smaller file. The text stays at a comfortable reading width even when the image has more space.
+
+## A short moving picture
+
+This six-second silent clip shows a small square moving across the same color study. It is a real MP4 with playback controls. It begins only when you press play.
+
+<Video
+  src="/media/light-study.mp4"
+  poster="/media/light-study-poster.jpg"
+  title="A square moving across a geometric color study"
+  caption="A six-second silent clip. Press play to see the movement."
+  transcript="An olive circle and a rust rectangle remain still on a cream background. A small charcoal square travels from left to right across the lower part of the frame. There is no speech, music, or other sound."
+/>
+
+For a longer recording, the same player can use a hosted MP4 URL. YouTube and Vimeo embeds also have a reusable component; see the publishing guide for a copyable example.
+
+## Let the words continue
+
+Media should fit into the flow of a piece. A reader can look, watch, and then continue without losing their place. Keep descriptions useful, captions brief, and give speech-led videos captions or a transcript.

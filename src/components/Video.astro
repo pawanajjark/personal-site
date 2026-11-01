@@ -1,0 +1,19 @@
+---
+interface Props {
+  src: string; webm?: string; poster?: string; title: string; caption?: string;
+  captions?: string; transcript?: string; wide?: boolean;
+}
+const { src, webm, poster, title, caption, captions, transcript, wide = false } = Astro.props;
+const type = src.split('?')[0].endsWith('.webm') ? 'video/webm' : 'video/mp4';
+---
+<figure class:list={['media-figure', { wide }]}>
+  <video controls playsinline preload="none" poster={poster} aria-label={title}>
+    {webm && <source src={webm} type="video/webm" />}
+    <source src={src} type={type} />
+    {captions && <track kind="captions" src={captions} srclang="en" label="English" default />}
+    <p>Your browser cannot play this video. <a href={src}>Download {title}</a>.</p>
+  </video>
+  {caption && <figcaption>{caption}</figcaption>}
+  {transcript && <details class="transcript"><summary>Read the video description or transcript</summary><p>{transcript}</p></details>}
+  <a class="media-download" href={src}>Open video file</a>
+</figure>

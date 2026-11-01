@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.env
+.env.*
+!.env.example
+.impeccable/review/
+public/media/private/
+.tools/
+
+# Local planning and agent context
+PERSONAL_SITE_AGENT_HANDOFF.md
+PERSONAL_SITE_CONTENT.md
+research-personal-publishing-*.md
+PRODUCT.md

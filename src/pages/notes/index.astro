@@ -1,0 +1,10 @@
+---
+import Base from '../../layouts/Base.astro';
+import Archive from '../../components/Archive.astro';
+import { publishedPosts } from '../../lib/posts';
+const posts = (await publishedPosts()).filter(post => post.data.kind === 'note');
+---
+<Base title="Notes" description="Short notes, observations, and things learned.">
+  <div class="page-intro"><h1>Notes</h1><p>Small discoveries, things I’m trying, and thoughts I want to keep. A note can be useful before it becomes an article.</p></div>
+  <Archive posts={posts} />
+</Base>

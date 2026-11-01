@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { publishedPosts, postUrl, formatDate, readingTime } from '../lib/posts';
+import { site } from '../site.config';
+const posts = await publishedPosts();
+const writings = posts.filter(post => post.data.kind === 'writing');
+const notes = posts.filter(post => post.data.kind === 'note');
+const latest = posts[0];
+const tags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
+---
+<Base>
+  <section class="introduction">
+    <h1>Hello, I’m {site.name}<span class="name-dot">.</span></h1>
+    <p>{site.intro}</p>
+    <p class="intro-more">{site.introMore}</p>
+    <p class="intro-links"><a href="/about/">A little about me <span aria-hidden="true">↗</span></a><span class="link-separator" aria-hidden="true">/</span><a href="/rss.xml">Follow via RSS</a></p>
+  </section>
+  {latest && <section class="latest-section" aria-labelledby="latest-heading">
+    <div class="section-heading"><h2 id="latest-heading">Recently written</h2>{latest.data.sample && <span class="sample-label">Sample post</span>}</div>
+    <h3><a href={postUrl(latest)}>{latest.data.title}</a></h3>
+    <p class="post-meta"><time datetime={latest.data.date.toISOString()}>{formatDate(latest.data.date)}</time><span aria-hidden="true">·</span>{readingTime(latest.body)} min read</p>
+    <p class="latest-description">{latest.data.description}</p>
+    <a class="read-link" href={postUrl(latest)}>Keep reading <span aria-hidden="true">→</span></a>
+  </section>}
+  <section class="home-section" aria-labelledby="writing-heading">
+    <div class="section-heading"><h2 id="writing-heading">Writing</h2><a href="/writing/">All writing <span aria-hidden="true">→</span></a></div>
+    <PostList posts={writings.slice(0, 5)} />
+  </section>
+  <section class="home-section" aria-labelledby="notes-heading">
+    <div class="section-heading"><h2 id="notes-heading">Notes</h2><a href="/notes/">All notes <span aria-hidden="true">→</span></a></div>
+    <p class="section-description">Small discoveries, things I’m trying, and thoughts I want to keep.</p>
+    <PostList posts={notes.slice(0, 4)} />
+  </section>
+  {tags.length > 0 && <section class="topics-section" aria-labelledby="topics-heading"><h2 id="topics-heading">Explore by topic</h2><ul>{tags.map(tag => <li><a href={`/topics/${tag}/`}>{tag}</a></li>)}</ul></section>}
+  {posts.some(post => post.data.sample) && <p class="development-note">The post marked “Sample” demonstrates images and video on this site.</p>}
+</Base>

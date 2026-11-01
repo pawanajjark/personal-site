@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config';
+---
+<Base title="About">
+  <div class="page-intro"><h1>Hi, I’m {site.name}.</h1></div>
+  <div class="prose">
+    <p>I spend a lot of my time building and improving software. Lately, I’ve also been exploring AI tools, agents, and browser automation: how they work, where they help, and what happens when they get things wrong.</p>
+    <p>I wanted a place to write some of this down. A useful discovery at work, an idea I’m trying, something I’ve learned, or a moment I want to remember. Some things need a proper article. Others only need a few sentences, a screenshot, or a short video.</p>
+    <p>That’s what this site is for. A record of what I’m working on and what I’m figuring out as I go.</p>
+    <p>I like simple sites with good typography and room to read. I want the same feeling here: a little modern, easy to browse, and comfortable to come back to.</p>
+    <h2>Find your way around</h2>
+    <p>Longer pieces live in <a href="/writing/">Writing</a>. Short observations and discoveries live in <a href="/notes/">Notes</a>. You can follow new posts with <a href="/rss.xml">RSS</a>, in the reader of your choice.</p>
+    {site.links.length > 0 && <><h2>Elsewhere</h2><ul>{site.links.map(link => <li><a href={link.href}>{link.label}</a></li>)}</ul></>}
+    <h2>Colophon</h2>
+    <p>Built with <a href="https://astro.build/">Astro</a>, written in Markdown, and designed for a comfortable read. The quiet layout takes inspiration from <a href="https://stephango.com/">Steph Ango’s site</a>.</p>
+  </div>
+</Base>

@@ -1,0 +1,44 @@
+---
+import { site } from '../site.config';
+import '../styles/global.css';
+interface Props { title?: string; description?: string; noindex?: boolean }
+const { title, description = site.description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url);
+const configured = new URL(site.url).hostname !== 'example.com';
+const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/' }, { label: 'Notes', href: '/notes/' }, { label: 'About', href: '/about/' }];
+---
+<!doctype html>
+<html lang={site.language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#faf9f6" />
+    <title>{title ? `${title} · ${site.name}` : site.title}</title>
+    <meta name="description" content={description} />
+    {(!configured || noindex) && <meta name="robots" content="noindex, nofollow" />}
+    {configured && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title ?? site.title} />
+    <meta property="og:description" content={description} />
+    {configured && <meta property="og:url" content={canonical} />}
+    <meta property="og:site_name" content={site.name} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name}'s writing`} href="/rss.xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="shell">
+      <header class="site-header">
+        <a class="site-name" href="/">{site.name}<span class="name-dot" aria-hidden="true">.</span></a>
+        <nav aria-label="Main navigation">
+          {nav.map(({ label, href }) => <a href={href} aria-current={(href === '/' ? Astro.url.pathname === '/' : Astro.url.pathname.startsWith(href)) ? 'page' : undefined}>{label}</a>)}
+        </nav>
+      </header>
+      <main id="main" tabindex="-1"><slot /></main>
+      <footer class="site-footer">
+        <span>Life, work, and things learned along the way.</span>
+        <div><a href="/rss.xml">RSS</a>{site.links.map(link => <a href={link.href}>{link.label}</a>)}<a href="/about/">About this site</a></div>
+      </footer>
+    </div>
+  </body>
+</html>

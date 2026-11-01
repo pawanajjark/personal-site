@@ -1,0 +1,12 @@
+---
+import { postUrl, shortDate, type Post } from '../lib/posts';
+interface Props { posts: Post[]; descriptions?: boolean }
+const { posts, descriptions = false } = Astro.props;
+---
+{posts.length ? <ul class:list={['post-list', { 'with-descriptions': descriptions }]}>
+  {posts.map(post => <li>
+    <time datetime={post.data.date.toISOString()}>{shortDate(post.data.date)}</time>
+    <div><a class="post-title" href={postUrl(post)}>{post.data.title}</a>{post.data.sample && <span class="sample-label">Sample</span>}
+    {descriptions && <p>{post.data.description}</p>}</div>
+  </li>)}
+</ul> : <p class="muted">Nothing published here yet. More soon.</p>}

@@ -1,0 +1,12 @@
+---
+interface Props { provider: 'youtube' | 'vimeo'; id: string; title: string; caption?: string }
+const { provider, id, title, caption } = Astro.props;
+if (!/^[a-zA-Z0-9_-]+$/.test(id)) throw new Error('Use a video ID, not a full URL.');
+const src = provider === 'youtube' ? `https://www.youtube-nocookie.com/embed/${id}` : `https://player.vimeo.com/video/${id}`;
+const original = provider === 'youtube' ? `https://www.youtube.com/watch?v=${id}` : `https://vimeo.com/${id}`;
+---
+<figure class="media-figure">
+  <iframe src={src} title={title} loading="lazy" allow="fullscreen; picture-in-picture; encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  {caption && <figcaption>{caption}</figcaption>}
+  <a class="media-download" href={original}>Watch on {provider === 'youtube' ? 'YouTube' : 'Vimeo'}</a>
+</figure>
