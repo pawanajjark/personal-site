@@ -17,3 +17,17 @@
 No personal external video ID was supplied, so YouTube/Vimeo provider playback is unverified. Test the actual video permissions and captions when adding one.
 
 Local builds fall back to `https://example.com` with indexing disabled. Vercel builds resolve their hosted URL automatically; previews stay excluded from indexing. Review the supplied editorial drafts and proposed dates, add actual domain/contact links as desired, and replace or hide the media demonstration before going live. The source is published to the public GitHub repository at the owner’s request. Vercel reported the initial deployment READY at https://personal-site-three-steel.vercel.app and automatically assigned it to production. The hosted page was not fetched as part of this deployment check. Custom DNS changes and personal media uploads have not been performed.
+
+
+## Lime-inspired refinement preview
+
+Branch: `design/lime-refinements`. Scoped to CSS and design-system documentation.
+
+- Kept the existing DM Sans font, palette, reading measure, content, and routes.
+- Added shared typography roles, a four-pixel spacing scale, and consistent 80/140/200ms interaction timings inspired by design.how’s Lime foundations.
+- Increased mobile body text to 18px and navigation targets to at least 44px tall. Navigation uses an expanding underline on hover/focus and for the current page.
+- `npm run build` passed with zero diagnostics after the style changes.
+- Local rendered checks: 1280px desktop, 390px mobile, 320px narrow mobile, and 768px tablet. No horizontal overflow in the inspected layouts. Tablet Home, Writing, Notes, and About each retained one H1.
+- Keyboard focus retained the two-pixel olive outline, and the focused navigation link’s underline expanded correctly. Reduced-motion CSS disables all transitions/animations and suppresses arrow movement; the operating-system preference was not toggled during this check.
+- Desktop, mobile, article, media, and tablet screenshots were inspected. Palette values and contrast are unchanged. No React runtime, new JavaScript, external component code, or photo gallery was added.
+- Deployment is a separate Vercel preview; the production address is not promoted by this branch’s deployment.

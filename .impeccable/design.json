@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T17:13:25.696237+00:00",
+  "generatedAt": "2026-11-01T17:35:42.591637+00:00",
   "title": "Design System: Pawan’s personal site",
   "extensions": {
     "colorMeta": {
@@ -44,7 +44,7 @@
       },
       "post-title": {
         "displayName": "Post title",
-        "purpose": "Article headings; 1.85rem on mobile."
+        "purpose": "Article headings; 2rem on mobile."
       },
       "section-title": {
         "displayName": "Section title",
@@ -52,7 +52,7 @@
       },
       "body": {
         "displayName": "Body",
-        "purpose": "18px root; 17px at widths up to 600px."
+        "purpose": "18px body text on desktop and mobile."
       },
       "prose": {
         "displayName": "Article prose",
@@ -67,13 +67,18 @@
     "motion": [
       {
         "name": "link-state",
-        "value": "color 140ms ease, text-decoration-color 140ms ease",
-        "purpose": "Ordinary link state changes."
+        "value": "color 80ms cubic-bezier(0.16,1,0.3,1), text-decoration-color 140ms cubic-bezier(0.16,1,0.3,1)",
+        "purpose": "Quick link feedback."
+      },
+      {
+        "name": "navigation-underline",
+        "value": "transform 200ms cubic-bezier(0.16,1,0.3,1)",
+        "purpose": "Expanding navigation underline and 3px reading-arrow movement."
       },
       {
         "name": "reduced-motion",
-        "value": "transition: none !important; scroll-behavior: auto !important",
-        "purpose": "Applied to all elements and pseudo-elements when reduced motion is requested."
+        "value": "transition: none !important; animation: none !important; scroll-behavior: auto !important; arrow transform: none !important",
+        "purpose": "Remove interaction movement when reduced motion is requested."
       }
     ],
     "breakpoints": [
@@ -96,24 +101,24 @@
       "name": "Header navigation",
       "kind": "nav",
       "refersTo": "navigation-link",
-      "description": "Visible text navigation; the current page has an olive underline.",
+      "description": "Text navigation with 44px targets and an expanding olive underline for hover, focus, and the current page.",
       "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#home\">Home</a><a href=\"#writing\" aria-current=\"page\">Writing</a><a href=\"#notes\">Notes</a><a href=\"#about\">About</a></nav>",
-      "css": ".ds-nav{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);display:flex;gap:26px;font-size:14.76px}.ds-nav a{color:inherit;text-decoration-color:#b2b6a8;text-underline-offset:.2em;text-decoration-thickness:1px;transition:color 140ms ease,text-decoration-color 140ms ease;color:var(--muted,#72736a);text-decoration:none;padding:5px 0}.ds-nav a:hover{color:var(--ink,#2b2d28)}.ds-nav a[aria-current=\"page\"]{color:var(--ink,#2b2d28);text-decoration:underline;text-decoration-color:var(--accent,#526640);text-underline-offset:.5em}.ds-nav a:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}@media(max-width:600px){.ds-nav{gap:17px;font-size:12.92px}.ds-nav a{padding:10px 0}}@media(prefers-reduced-motion:reduce){.ds-nav a{transition:none}}"
+      "css": ".ds-nav{font-family:'DM Sans Variable',sans-serif;line-height:1.65;display:flex;gap:24px;font-size:14px}.ds-nav a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:8px 0;color:var(--muted,#72736a);text-decoration:none;transition:color 80ms cubic-bezier(.16,1,.3,1)}.ds-nav a::after{content:'';position:absolute;inset-inline:0;bottom:6px;height:1.5px;background:var(--accent,#526640);transform:scaleX(0);transform-origin:left;transition:transform 200ms cubic-bezier(.16,1,.3,1)}.ds-nav a:is(:hover,:focus-visible,[aria-current='page']){color:var(--ink,#2b2d28)}.ds-nav a:is(:hover,:focus-visible,[aria-current='page'])::after{transform:scaleX(1)}.ds-nav a:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px}@media(max-width:600px){.ds-nav{gap:16px}}@media(prefers-reduced-motion:reduce){.ds-nav a,.ds-nav a::after{transition:none}}"
     },
     {
       "name": "Archive row",
       "kind": "custom",
       "description": "Plain publication list with a tabular date and optional description.",
       "html": "<ul class=\"ds-post-list\"><li><time datetime=\"2026-11-01\">Nov 1</time><div><a href=\"#sample\">A sample title</a><span class=\"ds-sample\">Sample</span><p>An example description for the archive.</p></div></li></ul>",
-      "css": ".ds-post-list{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);list-style:none;padding:0;margin:0}.ds-post-list li{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:20px;align-items:baseline;padding:15px 0;font-size:.94em}.ds-post-list time{color:var(--muted,#72736a);font-size:13.68px;font-variant-numeric:tabular-nums;white-space:nowrap}.ds-post-list a{color:inherit;text-decoration-color:#b2b6a8;text-underline-offset:.2em;text-decoration-thickness:1px;transition:color 140ms ease,text-decoration-color 140ms ease;text-decoration:none}.ds-post-list a:hover{color:var(--accent,#526640);text-decoration:underline}.ds-post-list a:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}.ds-post-list p{color:var(--muted,#72736a);font-size:14.58px;line-height:1.55;margin:5px 0 0}.ds-sample{display:inline;color:var(--muted,#72736a);font-size:11.34px;font-weight:400;white-space:nowrap;margin-left:10px}@media(max-width:600px){.ds-post-list{font-size:17px}.ds-post-list li{grid-template-columns:51px minmax(0,1fr);gap:14px;padding:9px 0}.ds-post-list a{overflow-wrap:anywhere}.ds-post-list time{font-size:12.92px}.ds-post-list p{font-size:13.77px}.ds-sample{font-size:10.54px}}@media(prefers-reduced-motion:reduce){.ds-post-list a{transition:none}}"
+      "css": ".ds-post-list{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);list-style:none;padding:0;margin:0}.ds-post-list li{display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:20px;align-items:baseline;padding:16px 0;font-size:18px}.ds-post-list time{color:var(--muted,#72736a);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}.ds-post-list a{color:inherit;text-decoration-color:#b2b6a8;text-underline-offset:.22em;text-decoration-thickness:1px;transition:color 80ms cubic-bezier(0.16,1,0.3,1),text-decoration-color 140ms cubic-bezier(0.16,1,0.3,1);text-decoration:none}.ds-post-list a:hover{color:var(--accent,#526640);text-decoration:underline}.ds-post-list a:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}.ds-post-list p{color:var(--muted,#72736a);font-size:15px;line-height:1.65;margin:4px 0 0}.ds-sample{display:inline;color:var(--muted,#72736a);font-size:12px;font-weight:400;white-space:nowrap;margin-left:8px}@media(max-width:600px){.ds-post-list{font-size:18px}.ds-post-list li{grid-template-columns:52px minmax(0,1fr);gap:16px;padding:16px 0}.ds-post-list a{overflow-wrap:anywhere}.ds-post-list time{font-size:14px}.ds-post-list p{font-size:15px}.ds-sample{font-size:12px}}@media(prefers-reduced-motion:reduce){.ds-post-list a{transition:none}}.ds-post-list a{font-weight:500}"
     },
     {
       "name": "Latest entry",
       "kind": "custom",
       "refersTo": "read-link",
       "description": "A featured post separated by fine rules on the continuous page surface.",
-      "html": "<section class=\"ds-latest\"><h2>Latest</h2><h3><a href=\"#sample\">A sample title</a></h3><p class=\"ds-meta\">Nov 1, 2026 · 2 min read</p><p class=\"ds-description\">An example description for a recent entry.</p><a class=\"ds-read\" href=\"#sample\">Keep reading <span aria-hidden=\"true\">→</span></a></section>",
-      "css": ".ds-latest{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);padding:29px 0 35px;border-top:1px solid var(--line,#e4e4dc);border-bottom:1px solid var(--line,#e4e4dc)}.ds-latest h2{font-size:1.1em;font-weight:550;line-height:1.35;letter-spacing:-.015em;margin:0 0 22px;text-wrap:balance}.ds-latest h3{font-size:1.25em;font-weight:500;line-height:1.4;letter-spacing:-.02em;margin:0 0 7px;text-wrap:balance}.ds-latest a{color:inherit;text-decoration-color:#b2b6a8;text-underline-offset:.2em;text-decoration-thickness:1px;transition:color 140ms ease,text-decoration-color 140ms ease;}.ds-latest h3 a{text-decoration:none}.ds-latest a:hover{color:var(--accent,#526640);text-decoration-color:var(--accent,#526640)}.ds-latest a:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}.ds-meta{color:var(--muted,#72736a);font-size:.77em;margin:0 0 13px}.ds-description{font-size:.93em;margin:0 0 12px;max-width:590px}.ds-latest .ds-read{font-size:.81em;color:var(--accent,#526640)}@media(max-width:600px){.ds-latest{font-size:17px;padding:25px 0 29px}.ds-latest h2{margin-bottom:18px}}@media(prefers-reduced-motion:reduce){.ds-latest a{transition:none}}"
+      "html": "<section class=\"ds-latest\"><h2>Recently written</h2><h3><a href=\"#sample\">A sample title</a></h3><p class=\"ds-meta\">Nov 1, 2026 · 2 min read</p><p class=\"ds-description\">An example description for a recent entry.</p><a class=\"ds-read\" href=\"#sample\">Keep reading <span aria-hidden=\"true\">→</span></a></section>",
+      "css": ".ds-latest{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);padding:32px 0;border-top:1px solid var(--line,#e4e4dc);border-bottom:1px solid var(--line,#e4e4dc)}.ds-latest h2{font-size:20px;font-weight:600;line-height:1.4;letter-spacing:-.015em;margin:0 0 20px;text-wrap:balance}.ds-latest h3{font-size:26px;font-weight:500;line-height:1.35;letter-spacing:-.02em;margin:0 0 8px;text-wrap:balance}.ds-latest a{color:inherit;text-decoration-color:#b2b6a8;text-underline-offset:.22em;text-decoration-thickness:1px;transition:color 80ms cubic-bezier(0.16,1,0.3,1),text-decoration-color 140ms cubic-bezier(0.16,1,0.3,1);}.ds-latest h3 a{text-decoration:none}.ds-latest a:hover{color:var(--accent,#526640);text-decoration-color:var(--accent,#526640)}.ds-latest a:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}.ds-meta{color:var(--muted,#72736a);font-size:14px;margin:0 0 16px}.ds-description{font-size:18px;margin:0 0 16px;max-width:600px}.ds-latest .ds-read{font-size:15px;color:var(--accent,#526640)}@media(max-width:600px){.ds-latest{font-size:18px;padding:24px 0}.ds-latest h2{margin-bottom:16px}}@media(prefers-reduced-motion:reduce){.ds-latest a{transition:none}}.ds-read span{display:inline-block;transition:transform 200ms cubic-bezier(.16,1,.3,1)}.ds-read:is(:hover,:focus-visible) span{transform:translateX(3px)}@media(prefers-reduced-motion:reduce){.ds-read span{transition:none;transform:none!important}}"
     },
     {
       "name": "Article prose",
@@ -121,19 +126,19 @@
       "refersTo": "inline-code",
       "description": "Comfortable reading text with a fine quote rule and quiet inline code.",
       "html": "<article class=\"ds-prose\"><p>This is sample reading text with an <a href=\"#reference\">ordinary reference link</a> and <code>inline code</code>.</p><blockquote>A sample quotation, set apart with a simple rule.</blockquote></article>",
-      "css": ".ds-prose{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);line-height:1.8;overflow-wrap:anywhere}.ds-prose p{margin:0 0 1.35em}.ds-prose a{color:inherit;text-decoration-color:#b2b6a8;text-underline-offset:.2em;text-decoration-thickness:1px;transition:color 140ms ease,text-decoration-color 140ms ease;}.ds-prose a:hover{color:var(--accent,#526640);text-decoration-color:var(--accent,#526640)}.ds-prose a:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}.ds-prose blockquote{margin:1.8em 0;padding-left:22px;border-left:1px solid var(--accent,#526640);color:var(--muted,#72736a)}.ds-prose code{font-size:.8em;font-family:ui-monospace,monospace;background:#eeeee6;padding:.16em .3em;border-radius:3px}@media(max-width:600px){.ds-prose{font-size:17px}}@media(prefers-reduced-motion:reduce){.ds-prose a{transition:none}}"
+      "css": ".ds-prose{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);line-height:1.8;overflow-wrap:anywhere}.ds-prose p{margin:0 0 24px}.ds-prose a{color:inherit;text-decoration-color:#b2b6a8;text-underline-offset:.22em;text-decoration-thickness:1px;transition:color 80ms cubic-bezier(0.16,1,0.3,1),text-decoration-color 140ms cubic-bezier(0.16,1,0.3,1);}.ds-prose a:hover{color:var(--accent,#526640);text-decoration-color:var(--accent,#526640)}.ds-prose a:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}.ds-prose blockquote{margin:32px 0;padding-left:24px;border-left:1px solid var(--accent,#526640);color:var(--muted,#72736a)}.ds-prose code{font-size:.8em;font-family:ui-monospace,monospace;background:#eeeee6;padding:.16em .3em;border-radius:3px}@media(max-width:600px){.ds-prose{font-size:18px}}@media(prefers-reduced-motion:reduce){.ds-prose a{transition:none}}"
     },
     {
       "name": "Transcript disclosure",
       "kind": "custom",
       "description": "Native disclosure beneath local video, using olive text and visible focus.",
       "html": "<details class=\"ds-transcript\"><summary>Read the video description or transcript</summary><p>This is an example video description.</p></details>",
-      "css": ".ds-transcript{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);margin-top:16px;font-size:14.4px}.ds-transcript summary{cursor:pointer;color:var(--accent,#526640)}.ds-transcript summary:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}.ds-transcript p{margin:12px 0 20.7px}@media(max-width:600px){.ds-transcript{font-size:13.6px}}"
+      "css": ".ds-transcript{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);margin-top:16px;font-size:15px}.ds-transcript summary{cursor:pointer;color:var(--accent,#526640)}.ds-transcript summary:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}.ds-transcript p{margin:12px 0 24px}@media(max-width:600px){.ds-transcript{font-size:15px}}"
     }
   ],
   "narrative": {
     "northStar": "A quiet reading room",
-    "overview": "A simple, understated, slightly modern personal website, informed by Steph Ango’s reading-focused site. Warm paper, dark type, generous margins, and a restrained olive accent keep attention on the writing. The visual structure comes from typography, whitespace, and plain lists.",
+    "overview": "A simple, understated, slightly modern personal website, informed by Steph Ango’s reading-focused site. Warm paper, dark type, generous margins, and a restrained olive accent keep attention on the writing. The visual structure comes from typography, whitespace, and plain lists.\n\nTypography, spacing, and motion refinements take inspiration from design.how’s Lime foundations. Their application here is original CSS adapted for reading; no external components or runtime were added.",
     "keyCharacteristics": [
       "One narrow reading column.",
       "Warm neutrals with small olive details.",

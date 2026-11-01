@@ -13,21 +13,21 @@ colors:
 typography:
   headline:
     fontFamily: "'DM Sans Variable', sans-serif"
-    fontSize: "1.9rem"
-    fontWeight: 550
-    lineHeight: 1.25
-    letterSpacing: "-.035em"
+    fontSize: "2rem"
+    fontWeight: 600
+    lineHeight: 1.2
+    letterSpacing: "-.03em"
   post-title:
     fontFamily: "'DM Sans Variable', sans-serif"
-    fontSize: "2.1rem"
-    fontWeight: 550
-    lineHeight: 1.25
-    letterSpacing: "-.035em"
+    fontSize: "2.25rem"
+    fontWeight: 600
+    lineHeight: 1.2
+    letterSpacing: "-.03em"
   section-title:
     fontFamily: "'DM Sans Variable', sans-serif"
-    fontSize: "1.1rem"
-    fontWeight: 550
-    lineHeight: 1.35
+    fontSize: "1.1111rem"
+    fontWeight: 600
+    lineHeight: 1.4
     letterSpacing: "-.015em"
   body:
     fontFamily: "'DM Sans Variable', sans-serif"
@@ -39,23 +39,33 @@ typography:
     lineHeight: 1.8
   metadata:
     fontFamily: "'DM Sans Variable', sans-serif"
-    fontSize: ".77rem"
-    lineHeight: 1.65
+    fontSize: "14px"
+    lineHeight: 1.5
 rounded:
   focus: "2px"
   inline-code: "3px"
   media: "4px"
 spacing:
-  caption-gap: "10px"
+  space-1: "4px"
+  space-2: "8px"
+  space-3: "12px"
+  space-4: "16px"
+  space-5: "20px"
+  space-6: "24px"
+  space-8: "32px"
+  space-10: "40px"
+  space-12: "48px"
+  space-16: "64px"
+  caption-gap: "12px"
   intro-paragraph-gap: "16px"
   list-column-gap: "20px"
   shell-gutter: "24px"
-  section-top: "35px"
+  section-top: "40px"
   post-footer-top: "48px"
 components:
   navigation-link:
     textColor: "{colors.muted}"
-    padding: "5px 0"
+    padding: "8px 0"
   navigation-link-current:
     textColor: "{colors.ink}"
   read-link:
@@ -76,6 +86,8 @@ components:
 **Creative North Star: "A quiet reading room"**
 
 A simple, understated, slightly modern personal website, informed by Steph Ango’s reading-focused site. Warm paper, dark type, generous margins, and a restrained olive accent keep attention on the writing. The visual structure comes from typography, whitespace, and plain lists.
+
+Typography, spacing, and motion refinements take inspiration from [design.how’s Lime foundations](https://design.how/systems/lime). Their application here is original CSS adapted for reading; no external components or runtime were added.
 
 **Key Characteristics:**
 - One narrow reading column.
@@ -101,17 +113,17 @@ A simple, understated, slightly modern personal website, informed by Steph Ango�
 
 ## Typography
 
-DM Sans Variable is the sole reading and interface family, with a sans-serif fallback. Inline code uses `ui-monospace, monospace`. All sizes in rem follow an 18px root, reduced to 17px at the mobile breakpoint.
+DM Sans Variable is the sole reading and interface family, with a sans-serif fallback. Inline code uses `ui-monospace, monospace`. All sizes in rem follow an 18px root, including on mobile. Shared roles use `--text-*` variables: 13px captions, 14px dates and navigation, 15px secondary copy, 18px body text, and a 19px introductory lead. Small sample labels are 12px.
 
-The frontmatter records the recurring roles. Page headings are modest; post titles are larger. The homepage greeting uses 1.8rem, reduced to 1.7rem on mobile. Post titles reduce to 1.85rem on mobile. Section headings and post titles retain their distinct roles rather than forming a marketing display scale.
+The frontmatter records the recurring roles. Page headings and the homepage greeting use 2rem at weight 600; post titles use 2.25rem. At widths up to 600px, these become 1.7778rem and 2rem respectively. Section headings are 1.1111rem at weight 600; featured titles are 1.4444rem at weight 500, reduced to 1.3333rem on mobile. Archive titles use weight 500.
 
-Article text uses the `prose` role. Its h2 is 1.3rem with margins of 2.4rem above and .8rem below; its h3 is 1.1rem with 1.8rem above and .6rem below. Paragraphs have 1.35rem bottom space. Dates in archive rows use tabular numerals. Headlines balance their wrapping; long post titles and article content can wrap anywhere when necessary.
+Article text uses the `prose` role. Its h2 is 1.3333rem with 48px above and 16px below; its h3 uses the section size with 32px above and 12px below. Paragraphs have 24px bottom space. Dates in archive rows use tabular numerals. Headlines balance their wrapping; long post titles and article content can wrap anywhere when necessary.
 
 ## Layout
 
-The centered shell has a maximum width of `calc(var(--measure) + 48px)`, with a 680px content measure and 24px horizontal gutters. Desktop header padding starts at 49px; the main region begins 74px below the header. Keep content in this single column.
+The centered shell has a maximum width of `calc(var(--measure) + 48px)`, with a 680px content measure and 24px horizontal gutters. Desktop header padding starts at 48px; the main region begins 64px below the header. A shared four-pixel scale runs from 4px through 64px. Keep content in this single column. Introductory text has a 600px maximum measure within it.
 
-Archive rows use a 64px date column, a flexible title column, and a 20px gap. At widths up to 600px, the date column becomes 51px with a 14px gap; main top padding becomes 56px and header top padding becomes 27px. Topic and footer groups stack. At widths up to 359px, gutters become 18px and navigation moves below the name.
+Archive rows use a 64px date column, a flexible title column, and a 20px gap. At widths up to 600px, the date column becomes 52px with a 16px gap; main top padding becomes 48px and header top padding becomes 24px. Topic and footer groups stack. At widths up to 359px, gutters become 20px and navigation moves below the name. Home sections start with 40px of space on desktop and 32px on mobile; the featured entry has 32px vertical padding on desktop and 24px on mobile.
 
 At widths of at least 1000px, explicitly wide media extends 100px beyond each side of the reading measure. Other media stays within the column. The footer follows the content, separated by a fine rule.
 
@@ -126,9 +138,9 @@ Text sections and archive rows have no enclosing rounded containers. Small radii
 ## Components
 
 ### Text links and navigation
-Ordinary links inherit text color and use a fine underline offset by .2em. Hover changes both text and underline to olive over 140ms with `ease`. Header links begin muted; hover makes them ink. The current page is ink with an olive underline offset by .5em. Navigation remains visible on mobile.
+Ordinary links inherit text color and use a fine underline offset by .22em. Color feedback takes 80ms and underline-color feedback takes 140ms, both on `cubic-bezier(0.16, 1, 0.3, 1)`. Header links begin muted and turn ink on hover or keyboard focus. An olive underline expands over 200ms on hover/focus and remains visible for the current page. Navigation targets are at least 44px tall and remain visible on mobile. Reading and archive-link arrows move 3px on hover/focus using the same 200ms easing.
 
-Keyboard focus on links, disclosures, and video uses a two-pixel olive outline with a five-pixel offset. The skip link becomes visible on focus. Reduced-motion preferences disable transitions.
+Keyboard focus on links, disclosures, and video uses a two-pixel olive outline with a five-pixel offset. The skip link becomes visible on focus. Reduced-motion preferences disable transitions, animation, and arrow movement.
 
 ### Post lists and latest entry
 Archive entries are plain date-and-title rows, with optional descriptions and explicit sample labels. Titles acquire an underline on hover. The latest entry uses top and bottom rules, a compact section heading, metadata, a description, and a reading link; it has no separate surface or shadow.
