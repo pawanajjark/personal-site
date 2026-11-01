@@ -1,5 +1,7 @@
 # Pawan’s personal site
 
+Hosted on Vercel: [personal-site-three-steel.vercel.app](https://personal-site-three-steel.vercel.app).
+
 A small Astro site for articles, short notes, images, and video. Content lives in Markdown/MDX; there is no database or browser CMS. Publishing means editing files, committing them to Git, and rebuilding the site.
 
 ## Run locally
@@ -153,7 +155,7 @@ Embeds load lazily, preserve their aspect ratio, and include a direct watch link
 4. Connect that repository to a static host such as Cloudflare Pages, Netlify, or Vercel. Build command: `npm run build`. Output directory: `dist`. Node: `22.23.4` or newer. No server adapter or runtime secrets are needed.
 5. Confirm the domain, feed URLs, and media in the deployed build. Later commits trigger rebuilds when the host’s Git integration is configured.
 
-`.github/workflows/check.yml` checks builds on pushes and pull requests; it does **not** deploy. The source repository is public on GitHub. Use `vercel deploy` for a preview deployment; `vercel deploy --prod` publishes to production when requested. Domain configuration and media uploads are separate setup steps. Deployment preparation assumes a root domain/subdomain; hosting under a subpath such as `username.github.io/repository/` needs Astro `base` configuration and base-aware internal URLs first.
+`.github/workflows/check.yml` checks builds on pushes and pull requests; it does **not** deploy. The source repository is public on GitHub. Vercel assigned this project’s first deployment to production automatically. Subsequent `vercel deploy` commands create previews; `vercel deploy --prod` updates production when requested. Domain configuration and media uploads are separate setup steps. Deployment preparation assumes a root domain/subdomain; hosting under a subpath such as `username.github.io/repository/` needs Astro `base` configuration and base-aware internal URLs first.
 
 ## Project map
 
