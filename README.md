@@ -151,7 +151,7 @@ Embeds load lazily, preserve their aspect ratio, and include a direct watch link
 
 The homepage’s “A few moments” section uses an image fan inspired by [ReactDrops Fan Gallery](https://reactdrops.dev/components/gallery/fan-gallery). It is an original Astro implementation with a small browser script; no React library or ReactDrops component source is included.
 
-The full gallery at `/photos/` contains 16 selected personal photos from `src/assets/photos/`. Their imports, titles, and descriptive alt text live in `src/data/photos.ts`; `homePhotos` selects three for the homepage fan. About uses `portrait.jpg`. These personal photos remain visible when development samples are hidden. Only selected, web-optimized images belong in this directory; their embedded metadata has been removed.
+The full gallery at `/photos/` contains 15 selected personal photos from `src/assets/photos/`. Their imports, titles, and descriptive alt text live in `src/data/photos.ts`; `homePhotos` selects three for the homepage fan. About uses `portrait.jpg`. These personal photos remain visible when development samples are hidden. Only selected, web-optimized images belong in this directory; their embedded metadata has been removed.
 
 Cards lift on hover or keyboard focus and open a native image viewer on click, tap, or Enter. Close it with Close, Escape, or the backdrop. Without JavaScript, the cards link directly to the full images. Reduced-motion preferences suppress the entrance and movement. `ImageFan` expects exactly three images in its default fan layout; `layout="grid"` supports any nonempty photo set, with landscape photos spanning both columns. Supply a unique `id` if using more than one gallery on a page.
 

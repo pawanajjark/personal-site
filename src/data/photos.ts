@@ -1,6 +1,5 @@
 import portrait from '../assets/photos/portrait.jpg';
 import candid from '../assets/photos/candid.jpg';
-import water from '../assets/photos/by-the-water.jpg';
 import hills from '../assets/photos/cloudy-hills.jpg';
 import blue from '../assets/photos/blue-light.jpg';
 import backdrop from '../assets/photos/colourful-backdrop.jpg';
@@ -16,7 +15,6 @@ import outdoors from '../assets/photos/outdoors.jpg';
 import evening from '../assets/photos/blue-evening.jpg';
 
 export const photos = [
-  { src: water, title: 'By the water', alt: 'Pawan smiling in sunglasses beside calm water, with trees and palms behind him.' },
   { src: candid, title: 'Everyday', alt: 'Pawan smiling in a white T-shirt while leaning on a counter.' },
   { src: hills, title: 'New friend', alt: 'Pawan offering food to a woolly white animal, with cloudy hills in the background.' },
   { src: blue, title: 'In blue', alt: 'Pawan raising both hands in a room filled with blue projected light.' },
@@ -34,4 +32,4 @@ export const photos = [
   { src: studio, title: 'A simple portrait', alt: 'A passport-style headshot of Pawan wearing a checked shirt against a white background.' },
 ];
 
-export const homePhotos = [photos[1], photos[0], photos[2]];
+export const homePhotos = [photos[0], photos[6], photos[1]];
