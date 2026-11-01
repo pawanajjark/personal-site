@@ -6,14 +6,13 @@ const { post } = Astro.props;
 const label = post.data.kind === 'note' ? 'Notes' : 'Writing';
 const listing = post.data.kind === 'note' ? '/notes/' : '/writing/';
 ---
-<Base title={post.data.title} description={post.data.description} noindex={post.data.sample}>
+<Base title={post.data.title} description={post.data.description} type="article">
   <article>
     <header class="post-header">
       <a class="back-link" href={listing}><span aria-hidden="true">←</span> {label}</a>
       <h1>{post.data.title}</h1>
-      <p class="post-meta"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span aria-hidden="true">·</span>{readingTime(post.body)} min read{post.data.sample && <span class="sample-label">Sample post</span>}</p>
+      <p class="post-meta"><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time><span aria-hidden="true">·</span>{readingTime(post.body)} min read</p>
     </header>
-    {post.data.sample && <aside class="sample-notice">This is a development sample to demonstrate the site, not a personal account by Pawan.</aside>}
     <div class="prose"><slot /></div>
     <footer class="post-footer">
       {post.data.tags.length > 0 && <ul class="post-tags" aria-label="Topics">{post.data.tags.map(tag => <li><a href={`/topics/${tag}/`}>{tag}</a></li>)}</ul>}

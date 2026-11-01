@@ -29,7 +29,7 @@ const galleryItems = items.map(item => {
       data-height={item.src.height}
       style={`--position:${index - 1};--angle:${(index - 1) * 10}deg;--drop:${index === 1 ? 0 : 14}px;--order:${index};--layer:${index === 1 ? 2 : 1};--photo-ratio:${item.src.width}/${item.src.height}`}
     >
-      <Image src={item.src} alt={item.alt} widths={layout === 'fan' ? [160, 320, 480] : [320, 480, 680, 960, 1360]} sizes={layout === 'fan' ? '(max-width: 600px) 112px, 176px' : item.landscape ? '(max-width: 728px) calc(100vw - 48px), 680px' : item.large ? '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 56vw, 387px' : '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 40vw, 269px'} loading={layout === 'grid' && index < 2 ? 'eager' : 'lazy'} />
+      <Image src={item.src} alt={item.alt} widths={layout === 'fan' ? [160, 320, 480] : [320, 480, 680, 960, 1360]} sizes={layout === 'fan' ? '(max-width: 600px) 112px, 176px' : item.landscape ? '(max-width: 728px) calc(100vw - 48px), 680px' : item.large ? '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 56vw, 387px' : '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 40vw, 269px'} loading={layout === 'fan' || index < 2 ? 'eager' : 'lazy'} />
       <span>{item.title}</span>
     </a>)}
   </div>

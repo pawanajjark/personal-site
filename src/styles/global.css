@@ -83,8 +83,6 @@ main { min-height: 58vh; padding-top: var(--space-16); }
 .read-link { font-size: var(--text-small); color: var(--accent); }
 .read-link span, .section-heading > a span { display: inline-block; transition: transform var(--duration-base) var(--ease-out); }
 .read-link:is(:hover, :focus-visible) span, .section-heading > a:is(:hover, :focus-visible) span { transform: translateX(3px); }
-.sample-label { display: inline; font-size: 12px; line-height: 1.5; color: var(--muted); font-weight: 400; white-space: nowrap; }
-.post-title + .sample-label { margin-left: var(--space-2); }
 .home-section { padding-top: var(--space-10); }
 .post-list { list-style: none; padding: 0; margin: 0; }
 .post-list li { display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: var(--space-5); align-items: baseline; padding-block: var(--space-2); font-size: var(--text-body); }
@@ -96,7 +94,6 @@ main { min-height: 58vh; padding-top: var(--space-16); }
 .topics-section { display: flex; gap: var(--space-6); align-items: baseline; margin-top: var(--space-10); padding-top: var(--space-6); border-top: 1px solid var(--line); }
 .topics-section h2 { font-size: var(--text-meta); color: var(--muted); font-weight: 400; white-space: nowrap; margin-bottom: 0; }
 .topics-section ul, .post-tags { display: flex; flex-wrap: wrap; gap: var(--space-4); list-style: none; padding: 0; margin: 0; font-size: var(--text-meta); }
-.development-note { font-size: var(--text-caption); color: var(--muted); margin: var(--space-8) 0 0; }
 .site-footer { border-top: 1px solid var(--line); margin-top: var(--space-16); padding: var(--space-6) 0 var(--space-10); color: var(--muted); font-size: var(--text-caption); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3) var(--space-5); }
 .site-footer div { display: flex; flex-wrap: wrap; gap: var(--space-5); }
 .site-footer a { text-decoration: none; }
@@ -110,7 +107,6 @@ main { min-height: 58vh; padding-top: var(--space-16); }
 .back-link { display: inline-block; color: var(--muted); font-size: var(--text-meta); text-decoration: none; margin-bottom: var(--space-8); }
 .post-header h1 { font-size: var(--text-post); margin-bottom: var(--space-4); overflow-wrap: anywhere; }
 .post-header .post-meta { margin-bottom: var(--space-10); }
-.sample-notice { color: var(--muted); font-size: var(--text-meta); line-height: 1.65; border-block: 1px solid var(--line); padding-block: var(--space-4); margin-bottom: var(--space-8); }
 .prose { font-size: var(--text-body); line-height: 1.8; overflow-wrap: anywhere; }
 .prose p { margin-bottom: var(--space-6); }
 .prose h2 { font-size: 1.3333rem; margin: var(--space-12) 0 var(--space-4); }

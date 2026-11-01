@@ -11,7 +11,6 @@ const posts = defineCollection({
     kind: z.enum(['writing', 'note']),
     tags: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).default([]),
     draft: z.boolean().default(false),
-    sample: z.boolean().default(false),
   }),
 });
 export const collections = { posts };

@@ -105,7 +105,7 @@ Typography, spacing, and motion refinements take inspiration from [design.how’
 - **Warm paper** (`paper`): the continuous page background.
 - **Soft ink** (`ink`): body copy, headings, and current navigation.
 - **Warm gray** (`muted`): dates, descriptions, captions, secondary navigation, and footer copy.
-- **Pale rule** (`line`): section, footer, and sample-notice boundaries.
+- **Pale rule** (`line`): section and footer boundaries.
 - **Light sage selection** (`selection`): selected text, paired with ink.
 - **Gray olive underline** (`link-underline`): ordinary link decoration.
 - **Warm code surface** (`code-surface`): inline code only.
@@ -114,7 +114,7 @@ Typography, spacing, and motion refinements take inspiration from [design.how’
 
 ## Typography
 
-DM Sans Variable is the sole reading and interface family, with a sans-serif fallback. Inline code uses `ui-monospace, monospace`. All sizes in rem follow an 18px root, including on mobile. Shared roles use `--text-*` variables: 13px captions, 14px dates and navigation, 15px secondary copy, 18px body text, and a 19px introductory lead. Small sample labels are 12px.
+DM Sans Variable is the sole reading and interface family, with a sans-serif fallback. Inline code uses `ui-monospace, monospace`. All sizes in rem follow an 18px root, including on mobile. Shared roles use `--text-*` variables: 13px captions, 14px dates and navigation, 15px secondary copy, 18px body text, and a 19px introductory lead.
 
 The frontmatter records the recurring roles. Page headings and the homepage greeting use 2rem at weight 600; post titles use 2.25rem. At widths up to 600px, these become 1.7778rem and 2rem respectively. Section headings are 1.1111rem at weight 600; featured titles are 1.4444rem at weight 500, reduced to 1.3333rem on mobile. Archive titles use weight 500.
 
@@ -144,13 +144,13 @@ Ordinary links inherit text color and use a fine underline offset by .22em. Colo
 Keyboard focus on links, disclosures, and video uses a two-pixel olive outline with a five-pixel offset. The skip link becomes visible on focus. Reduced-motion preferences disable transitions, animation, and arrow movement.
 
 ### Post lists and latest entry
-Archive entries are plain date-and-title rows, with optional descriptions and explicit sample labels. Titles acquire an underline on hover. The latest entry uses top and bottom rules, a compact section heading, metadata, a description, and a reading link; it has no separate surface or shadow.
+Archive entries are plain date-and-title rows, with optional descriptions. Titles acquire an underline on hover. The latest entry uses top and bottom rules, a compact section heading, metadata, a description, and a reading link; it has no separate surface or shadow.
 
 ### Article prose and media
 Blockquotes use muted text and a left olive rule. Inline code has a warm fill; preformatted code scrolls horizontally. Images and local video scale to the available width. Video and hosted embeds use a 16:9 frame. Captions are small, muted, centered, and spaced below the media. Transcripts use native disclosure controls with olive summary text. Downloads and original-provider links remain ordinary text links.
 
 ### Image fan
-The optional sample gallery sits after the writing and notes. Three image frames spread along a symmetric fan and lift on hover or keyboard focus. Frames and the native image-viewer dialog use 12px corners; image corners stay 4px. Motion is scoped to this gallery: a once-per-page 650ms unfold, 70ms stagger, and 400ms hover/focus response. Reduced motion leaves the fan static. Cards retain direct image links without JavaScript. Modal labels, Escape, backdrop dismissal, and focus return use native dialog behavior. Demo artwork is explicitly labeled.
+The photo fan sits after the writing and notes. Three image frames spread along a symmetric fan and lift on hover or keyboard focus. Frames and the native image-viewer dialog use 12px corners; image corners stay 4px. Motion is scoped to this gallery: a once-per-page 650ms unfold, 70ms stagger, and 400ms hover/focus response. Reduced motion leaves the fan static. Cards retain direct image links without JavaScript. Modal labels, Escape, backdrop dismissal, and focus return use native dialog behavior.
 
 ### Topics and footer
 Topics are wrapping text links, without pill backgrounds or badges. The footer uses small muted type, a top rule, and wrapping link groups.
@@ -161,7 +161,6 @@ Topics are wrapping text links, without pill backgrounds or badges. The footer u
 - **Do** preserve the narrow reading measure and responsive gutters.
 - **Do** distinguish reading hierarchy through type, spacing, and fine rules.
 - **Do** retain visible keyboard focus and reduced-motion behavior.
-- **Do** label development samples explicitly.
 
 ### Don't:
 - **Don't** introduce a marketing hero or portfolio/work-history cards.

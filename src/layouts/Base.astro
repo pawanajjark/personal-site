@@ -1,10 +1,13 @@
 ---
 import { site } from '../site.config';
 import '../styles/global.css';
-interface Props { title?: string; description?: string; noindex?: boolean }
-const { title, description = site.description, noindex = false } = Astro.props;
+import { getImage } from 'astro:assets';
+import portrait from '../assets/photos/portrait.jpg';
+interface Props { title?: string; description?: string; noindex?: boolean; type?: 'website' | 'article' }
+const { title, description = site.description, noindex = false, type = 'website' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url);
 const configured = new URL(site.url).hostname !== 'example.com';
+const shareImage = new URL((await getImage({ src: portrait, width: 800, format: 'jpg' })).src, site.url);
 const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/' }, { label: 'Notes', href: '/notes/' }, { label: 'About', href: '/about/' }];
 ---
 <!doctype html>
@@ -17,7 +20,8 @@ const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/'
     <meta name="description" content={description} />
     {(!configured || noindex || site.isPreview) && <meta name="robots" content="noindex, nofollow" />}
     {configured && <link rel="canonical" href={canonical} />}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
+    {configured && <meta property="og:image" content={shareImage} />}
     <meta property="og:title" content={title ?? site.title} />
     <meta property="og:description" content={description} />
     {configured && <meta property="og:url" content={canonical} />}
@@ -37,7 +41,7 @@ const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/'
       <main id="main" tabindex="-1"><slot /></main>
       <footer class="site-footer">
         <span>Life, work, and things learned along the way.</span>
-        <div><a href="/rss.xml">RSS</a>{site.links.map(link => <a href={link.href}>{link.label}</a>)}<a href="/about/">About this site</a></div>
+        <div><a href="/rss.xml">RSS</a>{site.links.map(link => <a href={link.href}>{link.label}</a>)}</div>
       </footer>
     </div>
   </body>

@@ -1,10 +1,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { site } from '../site.config';
 export type Post = CollectionEntry<'posts'>;
 export async function publishedPosts() {
-  return (await getCollection('posts', ({ data }) =>
-    !data.draft && data.date <= new Date() && (site.showSamples || !data.sample)
-  )).sort((a, b) => b.data.date.getTime() - a.data.date.getTime() || a.id.localeCompare(b.id));
+  return (await getCollection('posts', ({ data }) => !data.draft && data.date <= new Date())).sort((a, b) => b.data.date.getTime() - a.data.date.getTime() || a.id.localeCompare(b.id));
 }
 export const postUrl = (post: Post) => `/${post.data.kind === 'note' ? 'notes' : 'writing'}/${post.id}/`;
 export const formatDate = (date: Date) => new Intl.DateTimeFormat('en', {

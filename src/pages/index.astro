@@ -19,7 +19,7 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
     <p class="intro-links"><a href="/about/">A little about me <span aria-hidden="true">↗</span></a></p>
   </section>
   {latest && <section class="latest-section" aria-labelledby="latest-heading">
-    <div class="section-heading"><h2 id="latest-heading">Recently written</h2>{latest.data.sample && <span class="sample-label">Sample post</span>}</div>
+    <div class="section-heading"><h2 id="latest-heading">Recently written</h2></div>
     <h3><a href={postUrl(latest)}>{latest.data.title}</a></h3>
     <p class="post-meta"><time datetime={latest.data.date.toISOString()}>{formatDate(latest.data.date)}</time><span aria-hidden="true">·</span>{readingTime(latest.body)} min read</p>
     <p class="latest-description">{latest.data.description}</p>
@@ -39,6 +39,4 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
     <p class="section-description">A few pictures from life along the way.</p>
     <ImageFan items={homePhotos} />
   </section>
-  {tags.length > 0 && <section class="topics-section" aria-labelledby="topics-heading"><h2 id="topics-heading">Explore by topic</h2><ul>{tags.map(tag => <li><a href={`/topics/${tag}/`}>{tag}</a></li>)}</ul></section>}
-  {posts.some(post => post.data.sample) && <p class="development-note">The post marked “Sample” demonstrates images and video on this site.</p>}
-</Base>
+  {tags.length > 0 && <section class="topics-section" aria-labelledby="topics-heading"><h2 id="topics-heading">Explore by topic</h2><ul>{tags.map(tag => <li><a href={`/topics/${tag}/`}>{tag}</a></li>)}</ul></section>}</Base>
