@@ -40,3 +40,13 @@ Branch: `design/lime-refinements`. Scoped to CSS and design-system documentation
 - Browser checks covered click and Enter to open, accurate image/caption updates, Close and Escape, and focus returning to the selected card. Dialogs fit 390px and 320px mobile viewports. All three demo images loaded.
 - Scoped reduced-motion styles suppress unfold and lift effects; the system preference was not toggled in this check.
 - Local illustrations and the sample gallery are controlled by `showSamples`. README explains how to replace them with personal photos.
+
+## Personal photo gallery
+
+- Replaced the homepage demo fan with three selected personal photos, added an About portrait, and linked both pages to `/photos/`, containing all 16 approved individual photos.
+- Excluded the three collages and identity document. The separate passport-style headshot contains only a photograph.
+- All 16 optimized JPEG source files have no EXIF, IPTC, or XMP metadata. The built gallery contains 16 photo links, and its local asset references resolve.
+- `npm run build` passed with zero errors, warnings, or hints. Desktop and mobile checks found no horizontal overflow at 1440px, 390px, and 320px; all 16 images loaded after lazy loading.
+- Verified the standalone headshot in the native viewer, along with Close/Escape dismissal. Earlier checks verified keyboard opening and focus return for the shared viewer.
+- Independent visual review accepted the desktop/mobile gallery and portrait-viewer captures with no required fixes. Full-page captures showed a fixed skip-link artifact; this capture limitation was recorded. The command-line design detector remained unavailable.
+- Vercel reported the 16-photo preview READY. The deployed page was not fetched as part of verification.

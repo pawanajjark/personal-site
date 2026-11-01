@@ -147,13 +147,13 @@ import VideoEmbed from '../../components/VideoEmbed.astro';
 
 Embeds load lazily, preserve their aspect ratio, and include a direct watch link. YouTube uses its privacy-enhanced embed domain; provider requests still go to that third party. No external video is included or playback-verified because no personal video/ID has been supplied. Test the actual provider, video permissions, captions, and mobile playback when you add one.
 
-## Homepage image fan
+## Personal photos and homepage image fan
 
-The “A small visual notebook” section demonstrates an image fan inspired by [ReactDrops Fan Gallery](https://reactdrops.dev/components/gallery/fan-gallery). It is an original Astro implementation with a small browser script; no React library or ReactDrops component source is included.
+The homepage’s “A few moments” section uses an image fan inspired by [ReactDrops Fan Gallery](https://reactdrops.dev/components/gallery/fan-gallery). It is an original Astro implementation with a small browser script; no React library or ReactDrops component source is included.
 
-The three geometric demo artworks live in `src/assets/studies/`. To use personal photos, import three images in `src/pages/index.astro` and update the `studies` array’s `src`, `title`, and descriptive `alt` fields. Update the section heading, description, “Demo gallery” label, and `note` prop to suit the real images. Remove the section’s `site.showSamples` condition when you want real photos to remain visible after hiding development samples.
+The full gallery at `/photos/` contains 16 selected personal photos from `src/assets/photos/`. Their imports, titles, and descriptive alt text live in `src/data/photos.ts`; `homePhotos` selects three for the homepage fan. About uses `portrait.jpg`. These personal photos remain visible when development samples are hidden. Only selected, web-optimized images belong in this directory; their embedded metadata has been removed.
 
-Cards lift on hover or keyboard focus and open a native image viewer on click, tap, or Enter. Close it with Close, Escape, or the backdrop. Without JavaScript, the cards link directly to the full images. Reduced-motion preferences suppress the entrance and movement. The component currently expects exactly three images. Supply a unique `id` if using more than one fan on a page.
+Cards lift on hover or keyboard focus and open a native image viewer on click, tap, or Enter. Close it with Close, Escape, or the backdrop. Without JavaScript, the cards link directly to the full images. Reduced-motion preferences suppress the entrance and movement. `ImageFan` expects exactly three images in its default fan layout; `layout="grid"` supports any nonempty photo set, with landscape photos spanning both columns. Supply a unique `id` if using more than one gallery on a page.
 
 ## Publish with GitHub
 

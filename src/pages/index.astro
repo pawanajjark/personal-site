@@ -2,20 +2,13 @@
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import ImageFan from '../components/ImageFan.astro';
-import circles from '../assets/studies/circles.svg';
-import lines from '../assets/studies/lines.svg';
-import blocks from '../assets/studies/blocks.svg';
+import { homePhotos } from '../data/photos';
 import { publishedPosts, postUrl, formatDate, readingTime } from '../lib/posts';
 import { site } from '../site.config';
 const posts = await publishedPosts();
 const writings = posts.filter(post => post.data.kind === 'writing');
 const notes = posts.filter(post => post.data.kind === 'note');
 const latest = posts[0];
-const studies = [
-  { src: circles, title: 'Circle study', alt: 'Three concentric olive circles above three fine horizontal lines on cream.' },
-  { src: lines, title: 'Line study', alt: 'Five nested rust-colored arches on a warm cream background.' },
-  { src: blocks, title: 'Block study', alt: 'A balanced arrangement of rust, olive, and sand-colored rectangles.' },
-];
 const tags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
 ---
 <Base>
@@ -41,11 +34,11 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
     <p class="section-description">Small discoveries, things I’m trying, and thoughts I want to keep.</p>
     <PostList posts={notes.slice(0, 4)} />
   </section>
-  {site.showSamples && <section class="home-section" aria-labelledby="visual-notebook-heading">
-    <div class="section-heading"><h2 id="visual-notebook-heading">A small visual notebook</h2><span class="sample-label">Demo gallery</span></div>
-    <p class="section-description">Three original geometric studies. A little room for images, too.</p>
-    <ImageFan items={studies} note="Original geometric demo artwork." />
-  </section>}
+  <section class="home-section" aria-labelledby="visual-notebook-heading">
+    <div class="section-heading"><h2 id="visual-notebook-heading">A few moments</h2><a href="/photos/">All photos <span aria-hidden="true">→</span></a></div>
+    <p class="section-description">A few pictures from life along the way.</p>
+    <ImageFan items={homePhotos} />
+  </section>
   {tags.length > 0 && <section class="topics-section" aria-labelledby="topics-heading"><h2 id="topics-heading">Explore by topic</h2><ul>{tags.map(tag => <li><a href={`/topics/${tag}/`}>{tag}</a></li>)}</ul></section>}
   {posts.some(post => post.data.sample) && <p class="development-note">The post marked “Sample” demonstrates images and video on this site.</p>}
 </Base>

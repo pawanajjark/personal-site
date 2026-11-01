@@ -1,13 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import portrait from '../assets/photos/portrait.jpg';
 import { site } from '../site.config';
 ---
 <Base title="About">
-  <div class="page-intro"><h1>Hi, I’m {site.name}.</h1></div>
+  <div class="page-intro about-intro">
+    <h1>Hi, I’m {site.name}.</h1>
+    <Image class="about-portrait" src={portrait} alt="Pawan smiling in a grey T-shirt against a light blue background." width={400} loading="eager" />
+  </div>
   <div class="prose">
     <p>I spend a lot of my time building and improving software. Lately, I’ve also been exploring AI tools, agents, and browser automation: how they work, where they help, and what happens when they get things wrong.</p>
     <p>I wanted a place to write some of this down. A useful discovery at work, an idea I’m trying, something I’ve learned, or a moment I want to remember. Some things need a proper article. Others only need a few sentences, a screenshot, or a short video.</p>
     <p>That’s what this site is for. A record of what I’m working on and what I’m figuring out as I go.</p>
+    <p>You can also browse <a href="/photos/">a few photos from life along the way</a>.</p>
     <p>I like simple sites with good typography and room to read. I want the same feeling here: a little modern, easy to browse, and comfortable to come back to.</p>
     <h2>Find your way around</h2>
     <p>Longer pieces live in <a href="/writing/">Writing</a>. Short observations and discoveries live in <a href="/notes/">Notes</a>. You can follow new posts with <a href="/rss.xml">RSS</a>, in the reader of your choice.</p>
@@ -16,3 +22,14 @@ import { site } from '../site.config';
     <p>Built with <a href="https://astro.build/">Astro</a>, written in Markdown, and designed for a comfortable read. The quiet layout takes inspiration from <a href="https://stephango.com/">Steph Ango’s site</a>.</p>
   </div>
 </Base>
+
+<style>
+  .about-intro { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); }
+  .about-intro h1 { margin-bottom: 0; }
+  .about-portrait { display: block; width: 176px; height: 220px; object-fit: cover; object-position: 50% 25%; border-radius: 12px; }
+  @media (max-width: 600px) {
+    .about-intro { gap: var(--space-6); }
+    .about-portrait { width: 112px; height: 140px; flex-shrink: 0; }
+  }
+  @media (max-width: 359px) { .about-portrait { width: 96px; height: 120px; } }
+</style>

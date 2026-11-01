@@ -4,15 +4,16 @@ import type { ImageMetadata } from 'astro';
 interface Props {
   id?: string;
   note?: string;
+  layout?: 'fan' | 'grid';
   items: { src: ImageMetadata; title: string; alt: string }[];
 }
-const { id = 'visual-studies', items, note } = Astro.props;
-if (items.length !== 3) throw new Error('ImageFan expects three images.');
+const { id = 'visual-studies', items, note, layout = 'fan' } = Astro.props;
+if (!items.length || (layout === 'fan' && items.length !== 3)) throw new Error('ImageFan expects three images in a fan, or at least one in a grid.');
 ---
-<image-fan>
-  <div class="fan-stage" role="group" aria-label="Image gallery">
+<image-fan data-layout={layout}>
+  <div class:list={['image-stage', layout === 'fan' ? 'fan-stage' : 'photo-grid']} role="group" aria-label="Image gallery">
     {items.map((item, index) => <a
-      class="fan-card"
+      class:list={['image-link', layout === 'fan' ? 'fan-card' : 'photo-link', { 'landscape': item.src.width > item.src.height }]}
       href={item.src.src}
       aria-label={`View ${item.title.toLowerCase()}`}
       data-image={item.src.src}
@@ -22,11 +23,11 @@ if (items.length !== 3) throw new Error('ImageFan expects three images.');
       data-height={item.src.height}
       style={`--position:${index - 1};--angle:${(index - 1) * 10}deg;--drop:${index === 1 ? 0 : 14}px;--order:${index};--layer:${index === 1 ? 2 : 1}`}
     >
-      <Image src={item.src} alt={item.alt} loading="lazy" />
+      <Image src={item.src} alt={item.alt} widths={layout === 'fan' ? [160, 320, 480] : [320, 480, 680, 960, 1360]} sizes={layout === 'fan' ? '(max-width: 600px) 112px, 176px' : item.src.width > item.src.height ? '(max-width: 728px) calc(100vw - 48px), 680px' : '(max-width: 728px) calc((100vw - 72px) / 2), 328px'} loading={layout === 'grid' && index < 2 ? 'eager' : 'lazy'} />
       <span>{item.title}</span>
     </a>)}
   </div>
-  <p class="fan-hint">Select an image for a closer look.</p>
+  <p class="fan-hint">Select a photo for a closer look.</p>
   <dialog aria-labelledby={`${id}-caption`}>
     <div class="lightbox-heading">
       <p id={`${id}-caption`} data-caption>{items[0].title}</p>
@@ -46,7 +47,7 @@ if (items.length !== 3) throw new Error('ImageFan expects three images.');
       const caption = this.querySelector<HTMLElement>('[data-caption]');
       if (!dialog || !image || !caption || typeof dialog.showModal !== 'function') return;
       this.dataset.initialized = 'true';
-      this.querySelectorAll<HTMLAnchorElement>('.fan-card').forEach(link => {
+      this.querySelectorAll<HTMLAnchorElement>('.image-link').forEach(link => {
         link.addEventListener('click', event => {
           if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
           event.preventDefault();
@@ -65,7 +66,7 @@ if (items.length !== 3) throw new Error('ImageFan expects three images.');
           if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
         }
       });
-      if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (this.dataset.layout === 'fan' && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const observer = new IntersectionObserver(entries => {
           if (entries.some(entry => entry.isIntersecting)) {
             this.classList.add('has-entered');
@@ -81,6 +82,14 @@ if (items.length !== 3) throw new Error('ImageFan expects three images.');
 
 <style>
   image-fan { display: block; }
+  .photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-6); }
+  .photo-link { display: block; min-width: 0; text-decoration: none; }
+  .photo-link.landscape { grid-column: 1 / -1; }
+  .photo-link img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 4px; }
+  .photo-link.landscape img { aspect-ratio: auto; }
+  .photo-link span { display: block; padding-block: var(--space-3); color: var(--muted); font-size: var(--text-meta); line-height: 1.5; }
+  .photo-link:is(:hover, :focus-visible) span { color: var(--accent); text-decoration: underline; text-underline-offset: .22em; }
+  .photo-grid + .fan-hint { margin-top: var(--space-4); }
   .fan-stage {
     --card-width: clamp(92px, 25vw, 176px);
     --rest-spread: .72;
@@ -141,6 +150,7 @@ if (items.length !== 3) throw new Error('ImageFan expects three images.');
   [data-full-image] { display: block; max-width: 100%; max-height: min(65dvh, 640px); width: auto; height: auto; margin-inline: auto; border-radius: 4px; }
   .lightbox-note { color: var(--muted); font-size: var(--text-caption); text-align: center; margin: var(--space-4) 0 0; }
   @media (max-width: 600px) {
+    .photo-grid { gap: var(--space-5) var(--space-4); }
     .fan-stage { --card-width: clamp(82px, 25vw, 112px); --rest-spread: 1.12; --active-spread: 1.12; margin-top: var(--space-4); }
     dialog { padding: var(--space-4); }
   }

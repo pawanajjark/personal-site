@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import ImageFan from '../components/ImageFan.astro';
+import { photos } from '../data/photos';
+---
+<Base title="Photos" description="A few pictures from life along the way.">
+  <div class="page-intro">
+    <h1>A few moments</h1>
+    <p>A few pictures from life along the way.</p>
+  </div>
+  <ImageFan id="personal-photos" items={photos} layout="grid" />
+  <p class="return-link"><a href="/">Back home <span aria-hidden="true">↗</span></a></p>
+</Base>
+
+<style>
+  .return-link { margin: var(--space-10) 0 0; font-size: var(--text-meta); color: var(--muted); }
+</style>
