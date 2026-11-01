@@ -16,7 +16,7 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))].sort();
     <h1>Hello, I’m {site.name}<span class="name-dot">.</span></h1>
     <p>{site.intro}</p>
     <p class="intro-more">{site.introMore}</p>
-    <p class="intro-links"><a href="/about/">A little about me <span aria-hidden="true">↗</span></a><span class="link-separator" aria-hidden="true">/</span><a href="/rss.xml">Follow via RSS</a></p>
+    <p class="intro-links"><a href="/about/">A little about me <span aria-hidden="true">↗</span></a></p>
   </section>
   {latest && <section class="latest-section" aria-labelledby="latest-heading">
     <div class="section-heading"><h2 id="latest-heading">Recently written</h2>{latest.data.sample && <span class="sample-label">Sample post</span>}</div>
