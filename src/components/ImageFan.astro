@@ -9,11 +9,17 @@ interface Props {
 }
 const { id = 'visual-studies', items, note, layout = 'fan' } = Astro.props;
 if (!items.length || (layout === 'fan' && items.length !== 3)) throw new Error('ImageFan expects three images in a fan, or at least one in a grid.');
+let portraitIndex = 0;
+const galleryItems = items.map(item => {
+  const landscape = item.src.width > item.src.height;
+  const large = !landscape && [0, 3].includes(portraitIndex++ % 4);
+  return { ...item, landscape, large };
+});
 ---
 <image-fan data-layout={layout}>
   <div class:list={['image-stage', layout === 'fan' ? 'fan-stage' : 'photo-grid']} role="group" aria-label="Image gallery">
-    {items.map((item, index) => <a
-      class:list={['image-link', layout === 'fan' ? 'fan-card' : 'photo-link', { 'landscape': item.src.width > item.src.height }]}
+    {galleryItems.map((item, index) => <a
+      class:list={['image-link', layout === 'fan' ? 'fan-card' : 'photo-link', { landscape: item.landscape, 'photo-large': item.large }]}
       href={item.src.src}
       aria-label={`View ${item.title.toLowerCase()}`}
       data-image={item.src.src}
@@ -21,9 +27,9 @@ if (!items.length || (layout === 'fan' && items.length !== 3)) throw new Error('
       data-alt={item.alt}
       data-width={item.src.width}
       data-height={item.src.height}
-      style={`--position:${index - 1};--angle:${(index - 1) * 10}deg;--drop:${index === 1 ? 0 : 14}px;--order:${index};--layer:${index === 1 ? 2 : 1}`}
+      style={`--position:${index - 1};--angle:${(index - 1) * 10}deg;--drop:${index === 1 ? 0 : 14}px;--order:${index};--layer:${index === 1 ? 2 : 1};--photo-ratio:${item.src.width}/${item.src.height}`}
     >
-      <Image src={item.src} alt={item.alt} widths={layout === 'fan' ? [160, 320, 480] : [320, 480, 680, 960, 1360]} sizes={layout === 'fan' ? '(max-width: 600px) 112px, 176px' : item.src.width > item.src.height ? '(max-width: 728px) calc(100vw - 48px), 680px' : '(max-width: 728px) calc((100vw - 72px) / 2), 328px'} loading={layout === 'grid' && index < 2 ? 'eager' : 'lazy'} />
+      <Image src={item.src} alt={item.alt} widths={layout === 'fan' ? [160, 320, 480] : [320, 480, 680, 960, 1360]} sizes={layout === 'fan' ? '(max-width: 600px) 112px, 176px' : item.landscape ? '(max-width: 728px) calc(100vw - 48px), 680px' : item.large ? '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 56vw, 387px' : '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 40vw, 269px'} loading={layout === 'grid' && index < 2 ? 'eager' : 'lazy'} />
       <span>{item.title}</span>
     </a>)}
   </div>
@@ -82,12 +88,13 @@ if (!items.length || (layout === 'fan' && items.length !== 3)) throw new Error('
 
 <style>
   image-fan { display: block; }
-  .photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-6); }
-  .photo-link { display: block; min-width: 0; text-decoration: none; }
+  .photo-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--space-6); row-gap: var(--space-12); align-items: end; }
+  .photo-link { display: block; grid-column: span 5; min-width: 0; text-decoration: none; }
+  .photo-link.photo-large { grid-column: span 7; }
   .photo-link.landscape { grid-column: 1 / -1; }
   .photo-link img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 4px; }
-  .photo-link.landscape img { aspect-ratio: auto; }
-  .photo-link span { display: block; padding-block: var(--space-3); color: var(--muted); font-size: var(--text-meta); line-height: 1.5; }
+  .photo-link.landscape img { aspect-ratio: var(--photo-ratio); }
+  .photo-link span { display: block; padding-top: var(--space-3); color: var(--muted); font-size: var(--text-meta); line-height: 1.5; }
   .photo-link:is(:hover, :focus-visible) span { color: var(--accent); text-decoration: underline; text-underline-offset: .22em; }
   .photo-grid + .fan-hint { margin-top: var(--space-4); }
   .fan-stage {
@@ -150,7 +157,9 @@ if (!items.length || (layout === 'fan' && items.length !== 3)) throw new Error('
   [data-full-image] { display: block; max-width: 100%; max-height: min(65dvh, 640px); width: auto; height: auto; margin-inline: auto; border-radius: 4px; }
   .lightbox-note { color: var(--muted); font-size: var(--text-caption); text-align: center; margin: var(--space-4) 0 0; }
   @media (max-width: 600px) {
-    .photo-grid { gap: var(--space-5) var(--space-4); }
+    .photo-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+    .photo-link, .photo-link.photo-large, .photo-link.landscape { grid-column: auto; }
+    .photo-link img { aspect-ratio: var(--photo-ratio); }
     .fan-stage { --card-width: clamp(82px, 25vw, 112px); --rest-spread: 1.12; --active-spread: 1.12; margin-top: var(--space-4); }
     dialog { padding: var(--space-4); }
   }

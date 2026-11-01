@@ -50,3 +50,12 @@ Branch: `design/lime-refinements`. Scoped to CSS and design-system documentation
 - Verified the standalone headshot in the native viewer, along with Close/Escape dismissal. Earlier checks verified keyboard opening and focus return for the shared viewer.
 - Independent visual review accepted the desktop/mobile gallery and portrait-viewer captures with no required fixes. Full-page captures showed a fixed skip-link artifact; this capture limitation was recorded. The command-line design detector remained unavailable.
 - Vercel reported the 16-photo preview READY. The deployed page was not fetched as part of verification.
+
+## Approved photo album layout
+
+- Retains the 15 approved photos after removing “By the water.” “Mirror moment” leads the gallery and remains centred in the homepage fan.
+- Alternates larger and smaller portrait pairs, with full-row landscape spreads. Captions align along the bottom of each pair. Mobile photos stack at their natural proportions.
+- Intrinsic aspect ratios reserve space for lazy-loaded landscape/mobile images. No new assets, font, palette, or animation were introduced.
+- Build passed with zero diagnostics. The built gallery has 15 unique full-size links, three landscape spreads, and six larger portraits; all referenced original images exist.
+- Rendered checks covered 1440px desktop, 768px tablet, and 390px mobile; overflow checks also covered 320px. All 15 images loaded, and Enter/Escape/focus return worked in the viewer.
+- Independent visual review accepted the preview with no required fixes; the user subsequently approved merging it. The automated layout detector was unavailable, and a fixed skip-link artifact outside content remains a recorded full-page capture limitation.
