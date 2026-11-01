@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-01T17:35:42.591637+00:00",
+  "generatedAt": "2026-11-01T17:49:31.871458+00:00",
   "title": "Design System: Pawan’s personal site",
   "extensions": {
     "colorMeta": {
@@ -63,7 +63,23 @@
         "purpose": "Dates and reading time."
       }
     },
-    "shadows": [],
+    "shadows": [
+      {
+        "name": "image-fan-rest",
+        "value": "0 8px 24px rgb(43 45 40 / .12)",
+        "purpose": "Depth between overlapping gallery image frames only."
+      },
+      {
+        "name": "image-fan-active",
+        "value": "0 16px 32px rgb(43 45 40 / .16)",
+        "purpose": "Raised image frame on hover or keyboard focus."
+      },
+      {
+        "name": "image-viewer",
+        "value": "0 24px 80px rgb(43 45 40 / .2)",
+        "purpose": "Native modal image viewer above its backdrop."
+      }
+    ],
     "motion": [
       {
         "name": "link-state",
@@ -79,6 +95,11 @@
         "name": "reduced-motion",
         "value": "transition: none !important; animation: none !important; scroll-behavior: auto !important; arrow transform: none !important",
         "purpose": "Remove interaction movement when reduced motion is requested."
+      },
+      {
+        "name": "image-fan",
+        "value": "650ms unfold; 70ms stagger; 400ms hover/focus; cubic-bezier(0.16,1,0.3,1)",
+        "purpose": "Once-per-page image fan entrance and interaction; disabled by reduced motion."
       }
     ],
     "breakpoints": [
@@ -134,6 +155,13 @@
       "description": "Native disclosure beneath local video, using olive text and visible focus.",
       "html": "<details class=\"ds-transcript\"><summary>Read the video description or transcript</summary><p>This is an example video description.</p></details>",
       "css": ".ds-transcript{font-family:'DM Sans Variable',sans-serif;font-size:18px;line-height:1.65;color:var(--ink,#2b2d28);margin-top:16px;font-size:15px}.ds-transcript summary{cursor:pointer;color:var(--accent,#526640)}.ds-transcript summary:focus-visible{outline:2px solid var(--accent,#526640);outline-offset:5px;border-radius:2px;}.ds-transcript p{margin:12px 0 24px}@media(max-width:600px){.ds-transcript{font-size:15px}}"
+    },
+    {
+      "name": "Image fan",
+      "kind": "custom",
+      "description": "Three overlapping image frames, with hover/focus feedback. Site cards open a native viewer; without JavaScript they link to the original image.",
+      "html": "<div class=\"ds-image-fan\"><div class=\"ds-fan-stage\"><a class=\"ds-fan-card\" href=\"#study-0\" aria-label=\"View circle study\" style=\"--position:-1;--angle:-10deg;--drop:14px;--order:0;--layer:1\"><svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"800\" viewBox=\"0 0 600 800\">\n  <rect width=\"600\" height=\"800\" fill=\"#eeece1\"/>\n  <circle cx=\"300\" cy=\"320\" r=\"192\" fill=\"#8b976d\"/>\n  <circle cx=\"300\" cy=\"320\" r=\"128\" fill=\"#c6ccb4\"/>\n  <circle cx=\"300\" cy=\"320\" r=\"64\" fill=\"#eeece1\"/>\n  <path d=\"M108 604h384M108 632h384M108 660h384\" stroke=\"#a8af94\" stroke-width=\"3\"/>\n</svg>\n<span>Circle study</span></a><a class=\"ds-fan-card\" href=\"#study-1\" aria-label=\"View line study\" style=\"--position:0;--angle:0deg;--drop:0px;--order:1;--layer:2\"><svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"800\" viewBox=\"0 0 600 800\">\n  <rect width=\"600\" height=\"800\" fill=\"#e9e5dc\"/>\n  <path d=\"M112 568V320a188 188 0 0 1 376 0v248M148 568V320a152 152 0 0 1 304 0v248M184 568V320a116 116 0 0 1 232 0v248M220 568V320a80 80 0 0 1 160 0v248M256 568V320a44 44 0 0 1 88 0v248\" fill=\"none\" stroke=\"#b77858\" stroke-width=\"14\"/>\n  <rect x=\"112\" y=\"628\" width=\"376\" height=\"8\" fill=\"#b77858\"/>\n</svg>\n<span>Line study</span></a><a class=\"ds-fan-card\" href=\"#study-2\" aria-label=\"View block study\" style=\"--position:1;--angle:10deg;--drop:14px;--order:2;--layer:1\"><svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"800\" viewBox=\"0 0 600 800\">\n  <rect width=\"600\" height=\"800\" fill=\"#f0ede5\"/>\n  <rect x=\"108\" y=\"128\" width=\"176\" height=\"248\" fill=\"#b77858\"/>\n  <rect x=\"316\" y=\"128\" width=\"176\" height=\"112\" fill=\"#c3c9ae\"/>\n  <rect x=\"316\" y=\"272\" width=\"176\" height=\"248\" fill=\"#687651\"/>\n  <rect x=\"108\" y=\"408\" width=\"176\" height=\"112\" fill=\"#c3c9ae\"/>\n  <rect x=\"108\" y=\"552\" width=\"384\" height=\"112\" fill=\"#d4cbb9\"/>\n</svg>\n<span>Block study</span></a></div><p class=\"ds-fan-hint\">Select an image for a closer look.</p></div>",
+      "css": "\n  .ds-image-fan { display: block; }\n  .ds-fan-stage {\n    --card-width: clamp(92px, 25vw, 176px);\n    --rest-spread: .72;\n    --active-spread: .88;\n    --spread: calc(var(--card-width) * var(--rest-spread));\n    position: relative;\n    height: calc(var(--card-width) * 1.5 + 80px);\n    margin-top: var(--space-6, 24px);\n  }\n  .ds-fan-card {\n    position: absolute;\n    top: 32px;\n    left: 50%;\n    z-index: var(--layer);\n    width: var(--card-width);\n    padding: 8px 8px 12px;\n    border-radius: 12px;\n    background: var(--paper, #faf9f6);\n    color: var(--ink, #2b2d28);\n    box-shadow: 0 8px 24px rgb(43 45 40 / .12);\n    text-decoration: none;\n    text-align: center;\n    transform-origin: center 75%;\n    transform: translateX(calc(-50% + var(--position) * var(--spread))) translateY(var(--drop)) rotate(var(--angle));\n    transition: transform 400ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)), box-shadow 400ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));\n  }\n  .ds-fan-card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 4px; }\n  .ds-fan-card span { display: block; margin-top: 8px; font-size: 12px; line-height: 1.5; }\n  .ds-fan-stage:has(.ds-fan-card:is(:hover, :focus-visible)) { --spread: calc(var(--card-width) * var(--active-spread)); }\n  .ds-fan-card:is(:hover, :focus-visible) {\n    z-index: 3;\n    color: var(--ink, #2b2d28);\n    transform: translateX(calc(-50% + var(--position) * var(--spread))) translateY(-16px) rotate(0deg);\n    box-shadow: 0 16px 32px rgb(43 45 40 / .16);\n  }\n  .ds-fan-card:focus-visible { outline: 2px solid var(--accent, #526640); outline-offset: 5px; }\n  .ds-fan-hint { color: var(--muted, #72736a); font-size: var(--text-caption, 13px); text-align: center; margin-bottom: 0; }\n  .ds-has-entered .ds-fan-card { animation: fan-unfold 650ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) backwards; animation-delay: calc(var(--order) * 70ms); }\n  @keyframes fan-unfold {\n    from { transform: translateX(-50%) translateY(20px) rotate(0deg); }\n  }\n.ds-fan-card svg{display:block;width:100%;height:auto;aspect-ratio:3/4;border-radius:4px}.ds-image-fan{font-family:DM Sans Variable,sans-serif}@media(max-width:600px){.ds-fan-stage{--card-width:clamp(82px,25vw,112px);--rest-spread:1.12;--active-spread:1.12}}@media(prefers-reduced-motion:reduce){.ds-fan-card{animation:none!important;transition:none!important}.ds-fan-stage:has(.ds-fan-card:is(:hover,:focus-visible)){--spread:calc(var(--card-width)*var(--rest-spread))}.ds-fan-card:is(:hover,:focus-visible){transform:translateX(calc(-50% + var(--position)*var(--spread))) translateY(var(--drop)) rotate(var(--angle))}}"
     }
   ],
   "narrative": {
@@ -161,7 +189,7 @@
     "donts": [
       "Don't introduce a marketing hero or portfolio/work-history cards.",
       "Don't turn lists or topics into raised cards or filled pills.",
-      "Don't add decorative shadows, large accent surfaces, or an unrelated display font."
+      "Don't add shadows to reading sections or post lists, large accent surfaces, or an unrelated display font."
     ]
   }
 }

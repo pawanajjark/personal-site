@@ -31,3 +31,12 @@ Branch: `design/lime-refinements`. Scoped to CSS and design-system documentation
 - Keyboard focus retained the two-pixel olive outline, and the focused navigation link’s underline expanded correctly. Reduced-motion CSS disables all transitions/animations and suppresses arrow movement; the operating-system preference was not toggled during this check.
 - Desktop, mobile, article, media, and tablet screenshots were inspected. Palette values and contrast are unchanged. No React runtime, new JavaScript, external component code, or photo gallery was added.
 - Deployment is a separate Vercel preview; the production address is not promoted by this branch’s deployment.
+
+
+## Image fan preview
+
+- Added an original Astro image fan inspired by ReactDrops Fan Gallery, with three labeled geometric demo artworks after the writing and notes. No ReactDrops code or demo media were copied.
+- Production build passes with zero diagnostics. Native image links provide a no-JavaScript fallback.
+- Browser checks covered click and Enter to open, accurate image/caption updates, Close and Escape, and focus returning to the selected card. Dialogs fit 390px and 320px mobile viewports. All three demo images loaded.
+- Scoped reduced-motion styles suppress unfold and lift effects; the system preference was not toggled in this check.
+- Local illustrations and the sample gallery are controlled by `showSamples`. README explains how to replace them with personal photos.

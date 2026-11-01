@@ -45,6 +45,7 @@ rounded:
   focus: "2px"
   inline-code: "3px"
   media: "4px"
+  gallery-frame: "12px"
 spacing:
   space-1: "4px"
   space-2: "8px"
@@ -129,7 +130,7 @@ At widths of at least 1000px, explicitly wide media extends 100px beyond each si
 
 ## Elevation & Depth
 
-There are no box shadows. Fine rules and whitespace separate regions on a continuous paper background. Inline code has a pale tonal fill. Native media controls retain their browser behavior.
+Reading surfaces have no box shadows. Fine rules and whitespace separate regions on a continuous paper background. The image fan is a local exception: overlapping image frames use a soft downward shadow (`0 8px 24px rgb(43 45 40 / .12)`), rising to `0 16px 32px rgb(43 45 40 / .16)` on hover/focus. The image viewer uses `0 24px 80px rgb(43 45 40 / .2)` above a dimmed backdrop. Inline code has a pale tonal fill. Native media controls retain their browser behavior.
 
 ## Shapes
 
@@ -148,6 +149,9 @@ Archive entries are plain date-and-title rows, with optional descriptions and ex
 ### Article prose and media
 Blockquotes use muted text and a left olive rule. Inline code has a warm fill; preformatted code scrolls horizontally. Images and local video scale to the available width. Video and hosted embeds use a 16:9 frame. Captions are small, muted, centered, and spaced below the media. Transcripts use native disclosure controls with olive summary text. Downloads and original-provider links remain ordinary text links.
 
+### Image fan
+The optional sample gallery sits after the writing and notes. Three image frames spread along a symmetric fan and lift on hover or keyboard focus. Frames and the native image-viewer dialog use 12px corners; image corners stay 4px. Motion is scoped to this gallery: a once-per-page 650ms unfold, 70ms stagger, and 400ms hover/focus response. Reduced motion leaves the fan static. Cards retain direct image links without JavaScript. Modal labels, Escape, backdrop dismissal, and focus return use native dialog behavior. Demo artwork is explicitly labeled.
+
 ### Topics and footer
 Topics are wrapping text links, without pill backgrounds or badges. The footer uses small muted type, a top rule, and wrapping link groups.
 
@@ -162,4 +166,4 @@ Topics are wrapping text links, without pill backgrounds or badges. The footer u
 ### Don't:
 - **Don't** introduce a marketing hero or portfolio/work-history cards.
 - **Don't** turn lists or topics into raised cards or filled pills.
-- **Don't** add decorative shadows, large accent surfaces, or an unrelated display font.
+- **Don't** add shadows to reading sections or post lists, large accent surfaces, or an unrelated display font.
