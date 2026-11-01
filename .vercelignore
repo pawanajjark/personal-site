@@ -1,0 +1,14 @@
+.git/
+node_modules/
+dist/
+.astro/
+.tools/
+.impeccable/
+.env
+.env.*
+.DS_Store
+PERSONAL_SITE_AGENT_HANDOFF.md
+PERSONAL_SITE_CONTENT.md
+research-personal-publishing-*.md
+PRODUCT.md
+public/media/private/

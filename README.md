@@ -27,7 +27,7 @@ For this initial workspace only, a private Node runtime may be present in `.tool
 
 Edit `src/site.config.ts`: name, page title, description, introduction, actual public URL, optional social/contact links. Review the draft biography in `src/pages/about.astro`. The homepage, About page, archive introductions, and two starter posts use supplied editorial first-person draft copy, not a verified résumé or verbatim statement. The original planning documents and agent-only source notes are kept locally and excluded from this public repository. The dates are proposed draft dates; review all copy and dates before external publication. No employer, title, achievements, or contact details are assumed.
 
-“Starting here” and “What belongs here” are the supplied starter drafts, rendered locally for review. The separate “Images and moving pictures” post is marked **Sample** and uses original development media, not Pawan’s experiences. Replace, hide, or delete that demonstration before going live. Setting `showSamples: false` removes them from pages and RSS, including direct post routes. Sample pages carry `noindex`; until the URL is changed from `https://example.com`, every page carries `noindex` and robots.txt disallows indexing. RSS uses that configured URL, so set it before sharing the feed.
+“Starting here” and “What belongs here” are the supplied starter drafts, rendered locally for review. The separate “Images and moving pictures” post is marked **Sample** and uses original development media, not Pawan’s experiences. Replace, hide, or delete that demonstration before going live. Setting `showSamples: false` removes them from pages and RSS, including direct post routes. Sample pages carry `noindex`; local builds use `https://example.com` until a public URL is configured. Set the `SITE_URL` build environment variable for your custom domain; otherwise Vercel builds automatically use the deployment URL (or the production domain for production builds). Preview deployments carry `noindex` and disallow indexing. RSS and canonical metadata use the resolved URL.
 
 ## Add an article
 
@@ -153,7 +153,7 @@ Embeds load lazily, preserve their aspect ratio, and include a direct watch link
 4. Connect that repository to a static host such as Cloudflare Pages, Netlify, or Vercel. Build command: `npm run build`. Output directory: `dist`. Node: `22.23.4` or newer. No server adapter or runtime secrets are needed.
 5. Confirm the domain, feed URLs, and media in the deployed build. Later commits trigger rebuilds when the host’s Git integration is configured.
 
-`.github/workflows/check.yml` checks builds on pushes and pull requests; it does **not** deploy. The source repository is public on GitHub. A hosting account, website deployment, domain configuration, and media uploads are separate setup steps. Deployment preparation assumes a root domain/subdomain; hosting under a subpath such as `username.github.io/repository/` needs Astro `base` configuration and base-aware internal URLs first.
+`.github/workflows/check.yml` checks builds on pushes and pull requests; it does **not** deploy. The source repository is public on GitHub. Use `vercel deploy` for a preview deployment; `vercel deploy --prod` publishes to production when requested. Domain configuration and media uploads are separate setup steps. Deployment preparation assumes a root domain/subdomain; hosting under a subpath such as `username.github.io/repository/` needs Astro `base` configuration and base-aware internal URLs first.
 
 ## Project map
 

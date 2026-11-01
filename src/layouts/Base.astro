@@ -15,7 +15,7 @@ const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/'
     <meta name="theme-color" content="#faf9f6" />
     <title>{title ? `${title} · ${site.name}` : site.title}</title>
     <meta name="description" content={description} />
-    {(!configured || noindex) && <meta name="robots" content="noindex, nofollow" />}
+    {(!configured || noindex || site.isPreview) && <meta name="robots" content="noindex, nofollow" />}
     {configured && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title ?? site.title} />

@@ -14,3 +14,7 @@ PERSONAL_SITE_AGENT_HANDOFF.md
 PERSONAL_SITE_CONTENT.md
 research-personal-publishing-*.md
 PRODUCT.md
+
+.vercel/
+.vercel
+.env*
