@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "skills": {
+    "grammar-check": {
+      "source": "phuryn/pm-skills",
+      "commit": "9af7bfd0bc47fdad43c2eaa7a43cd13918e7aaef",
+      "sourceType": "github",
+      "skillPath": "pm-toolkit/skills/grammar-check/SKILL.md",
+      "computedHash": "84623601c379e9385a43f4fac86c40703b92517b5f15d9d7161b45ccece44c28"
+    }
+  }
+}

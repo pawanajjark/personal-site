@@ -85,7 +85,7 @@ const floatingCars = cars.slice(0, 10);
     </button>)}
   </div>
   <div class="collection-copy">
-    <button class="collection-link" type="button" data-open-collection aria-haspopup="dialog" aria-controls="hot-wheels-gallery"><svg class="collection-arrow" viewBox="0 0 80 64" fill="none" aria-hidden="true"><path d="M66 55C20 56 5 28 27 8M27 8L12 11M27 8L27 23" /></svg><span>Click to explore<br /> my collection</span></button>
+    <button class="collection-link" type="button" data-open-collection aria-haspopup="dialog" aria-controls="hot-wheels-gallery"><svg class="collection-arrow" viewBox="0 0 80 64" fill="none" aria-hidden="true"><path d="M66 55C20 56 5 28 27 8M27 8L12 11M27 8L27 23" /></svg><span>Explore my collection</span></button>
     <span class="collection-caption">A few of my 53 little cars</span>
   </div>
 </aside>
@@ -256,6 +256,15 @@ const floatingCars = cars.slice(0, 10);
   }
   @media (hover: hover) and (pointer: fine) {
     .floating-car:hover { animation-play-state: paused; z-index: 1; }
+  }
+  @media (max-width: 600px) {
+    .collection-note { margin-bottom: 24px; }
+    .floating-cars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 8px; width: 100%; height: auto; margin-bottom: 8px; }
+    .floating-car:nth-child(-n + 3) { position: static; width: 100%; transform: none; }
+    .car-cutout > span { position: static; display: block; font-size: 11px; }
+    .collection-link { margin-top: 0; }
+    .collection-arrow { display: none; }
+    .collection-caption { margin-top: 4px; }
   }
   @media (max-width: 480px) {
     dialog { padding: 20px; }
