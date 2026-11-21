@@ -101,6 +101,359 @@
       "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/121505/01_e5580b9a-0f00-4879-9f3e-48ac718dce09.webp",
       "width": 1280,
       "height": 1280
+    },
+    {
+      "id": "mickey-mouse-car",
+      "page": "https://www.hwcgarage.com/en/vehicle/mickey-mouse-car-2026-rouge-jjh74",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/119587/01_02a0426f-b9a6-4a89-9bb8-9b5a43c096fe.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "night-shifter",
+      "page": "https://www.hwcgarage.com/en/vehicle/night-shifter-2027-violet-jnx90",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/121714/01_5776ad79-f7f9-4ed9-a6cf-2a3afa25dd3f.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "76-chevy-chevette",
+      "page": "https://www.hwcgarage.com/en/vehicle/76-chevy-chevette-2026-vert-jjl45",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/119303/01_d3e65215-4d37-4dea-a29f-0a69500b30f6.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "jaguar-xjc-v12-coupe",
+      "page": "https://www.hwcgarage.com/en/vehicle/jaguar-xjc-v12-coupe-2026-vert-jjk22",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/95314/01_4cfe9b8b-9fd4-411f-87a5-4a184a42b642.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "16-cadillac-ats-v-r",
+      "page": "https://www.hwcgarage.com/en/vehicle/16-cadillac-ats-v-r-2026-argent-jjl36",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/95569/01_2d195c67-57a2-45ea-9269-6ed49762e525.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "96-porsche-carrera",
+      "page": "https://www.hwcgarage.com/en/vehicle/96-porsche-carrera-2026-rouge-jjl39",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/96085/01_d3cdd511-0ce3-4ea7-b904-9d7c649f8d84.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "datsun-240z",
+      "page": "https://www.hwcgarage.com/en/vehicle/datsun-240z-2026-vert-jjl53",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/92961/01_00bb57f1-dbec-405a-85a5-a9abffd09cf3.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "65-mercury-comet-cyclone",
+      "page": "https://www.hwcgarage.com/en/vehicle/65-mercury-comet-cyclone-2026-blanc-jjl46",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/119122/01_596e8b77-bf1c-4591-b0d1-9f1e3635d442.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "mcmurtry-speirling",
+      "page": "https://www.hwcgarage.com/en/vehicle/mcmurtry-speirling-2026-vert-jjk65",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/119331/01_da47aa36-3c47-44ad-9312-47138cd0c6d9.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "2024-aston-martin-vantage-gt3",
+      "page": "https://www.hwcgarage.com/en/vehicle/2024-aston-martin-vantage-gt3-2026-blanc-jjl24",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/96722/01_4587afd4-4345-4a28-9093-20bc0f4eba50.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "66-buick-riviera",
+      "page": "https://www.hwcgarage.com/en/vehicle/66-buick-riviera-2026-marron-jjk55",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94068/01_ed5564b5-7250-42bd-9bf5-e49d7143a4e5.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "70-ford-escort-rs1600",
+      "page": "https://www.hwcgarage.com/en/vehicle/70-ford-escort-rs1600-2026-marron-jjk08",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/93079/01_c8ccd023-831a-43ec-a8b5-86ce715bf783.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "68-shelby-gt500",
+      "page": "https://www.hwcgarage.com/en/vehicle/68-shelby-gt500-2026-vert-jjk24",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94600/01_c05f298c-bb76-45f9-9705-eb68f8c93896.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "time-attaxi",
+      "page": "https://www.hwcgarage.com/en/vehicle/time-attaxi-2026-jaune-jkw90",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/119463/01_a9ea9155-0143-4c61-8b01-6c2968fb89d5.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "lil-roar",
+      "page": "https://www.hwcgarage.com/en/vehicle/lil-roar-2026-blanc-jjk32",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94113/01_469b78f3-4cae-4c41-a998-abf8664bfd52.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "1963-ford-galaxie",
+      "page": "https://www.hwcgarage.com/en/vehicle/1963-ford-galaxie-2026-bleu-jjh73",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94592/01_c760dd0e-9d50-446e-867f-1d3c1c29978b.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "2019-audi-tt-safari",
+      "page": "https://www.hwcgarage.com/en/vehicle/2019-audi-tt-safari-2026-blanc-jjh69",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/88278/01_10712ee7-8c1a-42eb-95ae-e483b935bd42.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "el-segundo-rallye",
+      "page": "https://www.hwcgarage.com/en/vehicle/el-segundo-rallye-2026-noir-jjj97",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/91976/01_70747d04-cffe-4f16-bd73-8a825c76bf1a.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "bmw-2002",
+      "page": "https://www.hwcgarage.com/en/vehicle/bmw-2002-2025-jaune-hyx21",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/83775/01_9c5f02ca-3359-48d0-9e4c-6360b7ff63b0.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "96-dodge-viper-gts",
+      "page": "https://www.hwcgarage.com/en/vehicle/96-dodge-viper-gts-2025-bleu-hyw50",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/83175/01_fa7ff208-c86a-4218-898a-9f9fc0f14afb.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "lil-mad",
+      "page": "https://www.hwcgarage.com/en/vehicle/lil-mad-2026-dore-jjh65",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/87934/01_8d61caab-ebde-4abf-b02a-2dd351e37d01.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "project-twin-mill",
+      "page": "https://www.hwcgarage.com/en/vehicle/project-twin-mill-2026-blanc-jjh67",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/86877/01_fbea373c-94ef-466f-a50d-f0e743e45634.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "21-ford-bronco",
+      "page": "https://www.hwcgarage.com/en/vehicle/21-ford-bronco-2026-blanc-jjk46",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/95448/01_88f0adfb-96b9-4c53-933a-c4e9032703f1.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "68-corvette-gas-monkey-garage",
+      "page": "https://www.hwcgarage.com/en/vehicle/68-corvette-gas-monkey-garage-2026-dore-jjk47",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/95196/01_06c8573d-aa2b-448f-b0fc-742b0e776035.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "custom-62-chevy-pickup",
+      "page": "https://www.hwcgarage.com/en/vehicle/custom-62-chevy-pickup-2026-noir-jjk49",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/95813/01_baa725df-32e8-4dfa-a856-67e347b6b0a2.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "alfa-romeo-giulia-ti-super",
+      "page": "https://www.hwcgarage.com/en/vehicle/alfa-romeo-giulia-ti-super-2026-vert-jjk48",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/95396/01_dc8c9e65-925e-4a51-bf29-f5e7ab5824ff.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "volvo-240-drift-wagon",
+      "page": "https://www.hwcgarage.com/en/vehicle/volvo-240-drift-wagon-2026-jaune-jjl20",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/95617/01_743b7971-5de2-456e-a55c-e78df972ad0c.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "el-segundo-coupe",
+      "page": "https://www.hwcgarage.com/en/vehicle/el-segundo-coupe-2026-vert-jjl17",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/95020/01_b50493d5-b3ec-4be2-8ddb-5ba96a859c48.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "renault-espace-f1",
+      "page": "https://www.hwcgarage.com/en/vehicle/renault-espace-f1-2026-jaune-jjl40",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/92891/01_a8918b8f-509b-4ebb-946a-36723401f17e.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "bully-goat",
+      "page": "https://www.hwcgarage.com/en/vehicle/bully-goat-2026-rouge-jjk41",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/93859/01_a0fb0c24-f9c3-49b1-871c-0cdc028ea1a8.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "spider-mobile",
+      "page": "https://www.hwcgarage.com/en/vehicle/spider-mobile-2026-rouge-jjk33",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/96192/01_4d79b2af-3143-4500-a91c-2bba1c4f235b.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "street-shaker",
+      "page": "https://www.hwcgarage.com/en/vehicle/street-shaker-2026-bleu-jjk38",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/92914/01_66abd3f1-4bfa-4905-9a8e-a05b987ba616.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "33-ford-lo-boy",
+      "page": "https://www.hwcgarage.com/en/vehicle/33-ford-lo-boy-2026-blanc-jjl18",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94857/01_d2892b6a-55e3-44d2-85b2-df8618a2e481.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "mazda-mx-5-miata",
+      "page": "https://www.hwcgarage.com/en/vehicle/mazda-mx-5-miata-2026-bleu-jjl03",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94698/01_62028c1a-f264-43e5-8161-dfa2cc4b6615.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "deora-toond",
+      "page": "https://www.hwcgarage.com/en/vehicle/deora-toond-2026-rouge-jjl21",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/92287/01_01bb9253-759b-48ce-994c-fe6549022c0e.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "masters-of-the-universe-wind-raider",
+      "page": "https://www.hwcgarage.com/en/vehicle/masters-of-the-universe-wind-raider-2026-vert-jhw91",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/87689/01_ee504447-4e47-4f1e-a7cf-192653f493a3.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "audi-90-quattro",
+      "page": "https://www.hwcgarage.com/en/vehicle/audi-90-quattro-2024-bleu-htc64",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/80546/01_fa881e90-2edf-4e0b-91f0-3ec7d5f982f3.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "98-subaru-impreza-22b-sti-version",
+      "page": "https://www.hwcgarage.com/en/vehicle/98-subaru-impreza-22b-sti-version-2024-blanc-htb12",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/80906/01_b3ed3edd-0289-47a1-9d5c-88b188acaad1.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
+    },
+    {
+      "id": "custom-69-volkswagen-squareback",
+      "page": "https://www.hwcgarage.com/en/vehicle/69-volkswagen-squareback-2026-vert-jky60",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94995/01_fe51da1b-f17a-41c7-8e0b-7af4e91e313a.webp",
+      "width": 1280,
+      "height": 1280,
+      "processing": "White margins trimmed; resized with padding to 768 × 502 and encoded as WebP.",
+      "verifiedAgainst": "Original collection recording: model name, year, color and graphics."
     }
-  ]
+  ],
+  "updated": "2026-11-22",
+  "collectionEvidence": "Model names, release years, colors and graphics matched against Pawan’s 15.7-second collection recording, WhatsApp Video 2026-11-21 at 8.00.12 PM.mp4, referenced in SESSION_HANDOFF.md. The recording shows 53 entries."
 }
