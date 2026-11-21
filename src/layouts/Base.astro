@@ -28,7 +28,6 @@ const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/'
     <meta property="og:site_name" content={site.name} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="alternate" type="application/rss+xml" title={`${site.name}'s writing`} href="/rss.xml" />
     <script is:inline>
       // Runs before paint so a saved theme never flashes the other one.
       (() => {
@@ -67,7 +66,7 @@ const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/'
       <main id="main" tabindex="-1"><slot /></main>
       <footer class="site-footer">
         <span>Life, work, and things learned along the way.</span>
-        <div><a href="/rss.xml">RSS</a>{site.links.map(link => <a href={link.href}>{link.label}</a>)}</div>
+        {site.links.length > 0 && <div>{site.links.map(link => <a href={link.href}>{link.label}</a>)}</div>}
       </footer>
     </div>
   </body>

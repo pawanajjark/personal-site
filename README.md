@@ -19,7 +19,7 @@ Add a Markdown file to `src/content/posts/`. The file name becomes the URL.
 ```md
 ---
 title: "A small discovery"
-description: "One sentence for listings and RSS."
+description: "One sentence for listings."
 date: 2026-11-01
 kind: note          # note → /notes/…, writing → /writing/…
 tags: [learning]    # optional, lowercase-hyphenated; each tag gets a page
@@ -29,7 +29,7 @@ draft: false        # optional
 The post body.
 ```
 
-Drafts and future-dated posts are left out of every page and the feed. For images or video, use `.mdx` with the components in `src/components/` (`MediaFigure`, `Video`, `VideoEmbed`).
+Drafts and future-dated posts are left out of every page. For images or video, use `.mdx` with the components in `src/components/` (`MediaFigure`, `Video`, `VideoEmbed`).
 
 ## Where things live
 
