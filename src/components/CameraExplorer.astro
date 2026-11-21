@@ -1,11 +1,14 @@
 ---
-import CameraPhotos from './CameraPhotos.astro';
+import { Image } from 'astro:assets';
+import { cameraAlbums } from '../data/camera-photos';
 ---
 
 <camera-explorer>
   <aside class="camera-note" aria-label="Explore photos from my Sony Cybershot">
     <div class="camera-control" style="--open: 0">
       <div class="camera-object">
+        <div class="camera-flip">
+        <div class="camera-front">
         <div class="camera-top" aria-hidden="true"><span class="shutter"></span><span class="zoom-lever"><i>W</i><i>T</i></span><span class="mode-switch"></span><span class="power-label">POWER</span><span class="power-light"></span><span class="top-model">DSC-T20</span></div>
         <div class="camera-body">
           <div class="lens-plate" aria-hidden="true">
@@ -16,51 +19,165 @@ import CameraPhotos from './CameraPhotos.astro';
           </div>
           <span class="body-label" aria-hidden="true">8.1 MEGA PIXELS</span>
           <span class="speaker" aria-hidden="true"></span><span class="strap-lug" aria-hidden="true"></span><span class="spec" aria-hidden="true">f=6.3-18.9mm 1:3.5-4.4 · MADE IN JAPAN</span>
-          <button class="lens-cover" type="button" aria-haspopup="dialog" aria-controls="camera-albums-dialog" aria-label="Slide the cover down or press to switch on my Sony Cybershot and explore photos">
+          <button class="lens-cover" type="button" aria-controls="camera-back" aria-label="Slide the cover down or press to switch on my Sony Cybershot and explore photos">
             <span class="cover-edge" aria-hidden="true"></span><span class="sony-logo" aria-hidden="true">SONY</span><span class="cybershot-logo" aria-hidden="true">Cyber-shot</span><span class="cover-grip" aria-hidden="true"></span><span class="cover-rail" aria-hidden="true"></span><span class="cover-ridges" aria-hidden="true"></span><span class="cover-zeiss" aria-hidden="true">Carl Zeiss<small>Vario-Tessar</small></span><span class="cover-mp" aria-hidden="true">8.1<small>MEGA PIXELS</small></span><span class="cover-screw cs1" aria-hidden="true"></span><span class="cover-screw cs2" aria-hidden="true"></span>
           </button>
         </div>
-        <input class="cover-slider" type="range" min="0" max="100" value="0" step="1" aria-label="Slide the lens cover down to explore photos" aria-controls="camera-albums-dialog" aria-orientation="vertical" />
+        </div>
+        <div class="camera-back" id="camera-back" role="group" aria-label="Photos on the back of my Sony Cybershot" inert>
+          <div class="lcd">
+            {cameraAlbums.map(album => <div class="lcd-album" data-title={album.title} data-shuffle={album.id === 'people' || undefined} hidden>
+              {album.photos.map(photo => <figure hidden><Image src={photo.src} alt={photo.alt} width={640} widths={[640, 1600]} sizes="640px" loading="lazy" /><figcaption>{photo.title}</figcaption></figure>)}
+            </div>)}
+            <div class="lcd-menu">
+              <p>Select album</p>
+              {cameraAlbums.map((album, n) => <button type="button" data-pick={n}><span>{album.title}</span><small>{album.photos.length}</small></button>)}
+            </div>
+            <div class="osd" aria-live="polite"><span data-osd-album></span><span data-osd-count></span></div>
+            <button class="lcd-zoom" type="button" data-zoom aria-label="Enlarge photo" aria-controls="camera-photo-dialog"></button>
+            <span class="lcd-glare" aria-hidden="true"></span>
+          </div>
+          <div class="back-controls">
+            <div class="dpad">
+              <button type="button" data-nav="up" aria-label="Up">▲</button>
+              <button type="button" data-nav="left" aria-label="Previous photo">◀</button>
+              <button type="button" class="dpad-center" data-nav="ok" aria-label="Select">OK</button>
+              <button type="button" data-nav="right" aria-label="Next photo">▶</button>
+              <button type="button" data-nav="down" aria-label="Down">▼</button>
+            </div>
+            <button class="menu-btn" type="button" data-nav="menu">Menu</button>
+            <button class="flip-back" type="button" data-camera-close>Flip back</button>
+          </div>
+          <span class="back-print" aria-hidden="true">Cyber-shot</span>
+        </div>
+        </div>
+        <input class="cover-slider" type="range" min="0" max="100" value="0" step="1" aria-label="Slide the lens cover down to explore photos" aria-controls="camera-back" aria-orientation="vertical" />
       </div>
       <p class="camera-model">My Sony Cybershot<span>DSC-T20 · 2007</span></p>
-      <button class="explore-hint" type="button" data-camera-open aria-haspopup="dialog" aria-controls="camera-albums-dialog"><svg class="hint-arrow" viewBox="0 0 80 64" fill="none" aria-hidden="true"><path d="M68 8C73 37 43 59 10 37M10 37L13 52M10 37L26 36" /></svg><span>Explore my photos</span></button>
+      <button class="explore-hint" type="button" data-camera-open aria-controls="camera-back"><svg class="hint-arrow" viewBox="0 0 80 64" fill="none" aria-hidden="true"><path d="M68 8C73 37 43 59 10 37M10 37L13 52M10 37L26 36" /></svg><span>Explore my photos</span></button>
     </div>
   </aside>
 
-  <dialog id="camera-albums-dialog" aria-labelledby="camera-albums-title">
-    <header class="explorer-heading">
-      <div><p class="album-eyebrow">Through my Cybershot</p><h2 id="camera-albums-title">Things I wanted to keep.</h2></div>
-      <button class="explorer-close" type="button" data-camera-close aria-label="Close photo albums" autofocus>✕</button>
-    </header>
-    <CameraPhotos />
-    <p class="camera-credit">All photographs in these albums are mine.</p>
+  <dialog id="camera-photo-dialog" aria-label="Enlarged photo">
+    <img alt="" />
+    <p class="zoom-caption"></p>
+    <button class="zoom-nav zoom-prev" type="button" data-zoom-step="left" aria-label="Previous photo">◀</button>
+    <button class="zoom-nav zoom-next" type="button" data-zoom-step="right" aria-label="Next photo">▶</button>
+    <button class="zoom-close" type="button" data-zoom-close aria-label="Close enlarged photo">✕</button>
   </dialog>
+
 </camera-explorer>
 
 <script>
   document.querySelectorAll('camera-explorer').forEach(explorer => {
-    const dialog = explorer.querySelector<HTMLDialogElement>('#camera-albums-dialog');
     const slider = explorer.querySelector<HTMLInputElement>('.cover-slider');
     const control = explorer.querySelector<HTMLElement>('.camera-control');
     const cover = explorer.querySelector<HTMLButtonElement>('.lens-cover');
     const body = explorer.querySelector<HTMLElement>('.camera-body');
-    if (!dialog || !slider || !control || !cover || !body) return;
+    const front = explorer.querySelector<HTMLElement>('.camera-front');
+    const back = explorer.querySelector<HTMLElement>('.camera-back');
+    if (!slider || !control || !cover || !body || !front || !back) return;
+    const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const albums = [...back.querySelectorAll<HTMLElement>('.lcd-album')];
+    const picks = [...back.querySelectorAll<HTMLElement>('[data-pick]')];
+    const menu = back.querySelector<HTMLElement>('.lcd-menu')!;
+    const osd = back.querySelector<HTMLElement>('.osd')!;
+    const osdAlbum = back.querySelector<HTMLElement>('[data-osd-album]')!;
+    const osdCount = back.querySelector<HTMLElement>('[data-osd-count]')!;
+    const zoom = explorer.querySelector<HTMLDialogElement>('#camera-photo-dialog')!;
+    const zoomImg = zoom.querySelector('img')!;
+    const zoomCaption = zoom.querySelector<HTMLElement>('.zoom-caption')!;
+    const zoomBtn = back.querySelector<HTMLElement>('[data-zoom]')!;
+    const syncZoom = () => {
+      const fig = albums[album].children[photo];
+      const img = fig.querySelector('img')!;
+      zoomImg.sizes = '(min-width: 1000px) 900px, 92vw';
+      zoomImg.srcset = img.srcset;
+      zoomImg.src = img.currentSrc || img.src;
+      zoomImg.alt = img.alt;
+      zoomCaption.textContent = `${fig.querySelector('figcaption')?.textContent ?? ''} · ${photo + 1}/${albums[album].children.length}`;
+    };
+    let album = 0, photo = 0, inMenu = true;
+    // Fresh random order each time an album marked data-shuffle is entered.
+    const enter = (n: number) => {
+      album = n; photo = 0; inMenu = false;
+      const el = albums[n];
+      if (el.dataset.shuffle === undefined) return;
+      const figs = [...el.children];
+      for (let i = figs.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [figs[i], figs[j]] = [figs[j], figs[i]]; }
+      el.append(...figs);
+    };
+    const show = () => {
+      menu.hidden = !inMenu;
+      osd.hidden = inMenu;
+      zoomBtn.hidden = inMenu;
+      picks.forEach((el, n) => el.setAttribute('aria-current', String(n === album)));
+      albums.forEach((el, n) => {
+        el.hidden = inMenu || n !== album;
+        if (n === album) [...el.children].forEach((fig, k) => (fig as HTMLElement).hidden = k !== photo);
+      });
+      osdAlbum.textContent = albums[album].dataset.title ?? '';
+      osdCount.textContent = `${photo + 1}/${albums[album].children.length}`;
+      if (zoom.open) syncZoom();
+    };
+    const step = (dir: string) => {
+      const count = albums[album].children.length;
+      const wrap = (n: number, max: number) => (n + max) % max;
+      if (dir === 'menu') inMenu = true;
+      else if (inMenu) {
+        if (dir === 'up' || dir === 'down') album = wrap(album + (dir === 'down' ? 1 : -1), albums.length);
+        else if (dir === 'ok' || dir === 'right') enter(album);
+      } else if (dir === 'left' || dir === 'right') photo = wrap(photo + (dir === 'right' ? 1 : -1), count);
+      else if (dir === 'up' || dir === 'down') enter(wrap(album + (dir === 'up' ? 1 : -1), albums.length));
+      show();
+    };
+    picks.forEach((el, n) => el.addEventListener('click', () => { enter(n); show(); }));
+    back.querySelectorAll<HTMLElement>('[data-nav]').forEach(button => button.addEventListener('click', () => step(button.dataset.nav!)));
+    back.addEventListener('keydown', event => {
+      const dir = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down' }[event.key];
+      if (dir) { event.preventDefault(); step(dir); }
+      else if (event.key === 'Escape') close();
+      else if (event.key === 'Enter' && !(event.target as HTMLElement).closest('button')) step('ok');
+    });
+    zoomBtn.addEventListener('click', () => { syncZoom(); zoom.showModal(); });
+    zoom.querySelectorAll<HTMLElement>('[data-zoom-step]').forEach(b => b.addEventListener('click', () => step(b.dataset.zoomStep!)));
+    zoom.querySelector('[data-zoom-close]')?.addEventListener('click', () => zoom.close());
+    zoom.addEventListener('click', event => { if (event.target === zoom) zoom.close(); });
+    zoom.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft') step('left');
+      else if (event.key === 'ArrowRight') step('right');
+    });
+    show();
+
     let opened = false;
     let dragStart: number | undefined;
     let startValue = 0;
     let moved = false;
     let ignoreClick = false;
+    const flipTime = () => (reduced() ? 0 : 700);
     const setPosition = (value: number) => {
       slider.value = String(Math.max(0, Math.min(100, value)));
       control.style.setProperty('--open', String(Number(slider.value) / 100));
+    };
+    const setFlipped = (on: boolean) => {
+      control.dataset.flipped = String(on);
+      front.inert = on;
+      back.inert = !on;
     };
     const open = () => {
       if (opened) return;
       opened = true;
       setPosition(100);
-      const coverDuration = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300;
-      const lensPause = 250;
-      window.setTimeout(() => dialog.showModal(), coverDuration + lensPause);
+      window.setTimeout(() => {
+        setFlipped(true);
+        window.setTimeout(() => back.querySelector<HTMLElement>('[data-camera-close]')?.focus(), flipTime());
+      }, (reduced() ? 0 : 300) + 250);
+    };
+    const close = () => {
+      if (!opened) return;
+      setFlipped(false);
+      inMenu = true; show();
+      window.setTimeout(() => { opened = false; setPosition(0); cover.focus(); }, flipTime() / 2);
     };
     cover.addEventListener('pointerdown', event => {
       if (event.button !== 0 || opened) return;
@@ -95,7 +212,7 @@ import CameraPhotos from './CameraPhotos.astro';
       open();
     });
     explorer.querySelectorAll('[data-camera-open]').forEach(button => button.addEventListener('click', open));
-    explorer.querySelector('[data-camera-close]')?.addEventListener('click', () => dialog.close());
+    explorer.querySelector('[data-camera-close]')?.addEventListener('click', close);
     slider.addEventListener('input', () => {
       setPosition(Number(slider.value));
       if (Number(slider.value) >= 90) open();
@@ -103,15 +220,6 @@ import CameraPhotos from './CameraPhotos.astro';
     slider.addEventListener('change', () => {
       if (opened) return;
       setPosition(0);
-    });
-    dialog.addEventListener('close', () => {
-      opened = false;
-      setPosition(0);
-    });
-    dialog.addEventListener('click', event => {
-      if (event.target !== dialog) return;
-      const bounds = dialog.getBoundingClientRect();
-      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
     });
   });
 </script>
@@ -169,18 +277,53 @@ import CameraPhotos from './CameraPhotos.astro';
   [data-dragging="true"] .lens-cover { transition: none; }
   .camera-body:has(.lens-cover:focus-visible), .camera-object:has(.cover-slider:focus-visible) { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 16px; }
   .cover-slider { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .camera-flip { position: relative; transform-style: preserve-3d; transform: perspective(1400px) rotateY(0); transition: transform 700ms cubic-bezier(.45, .05, .2, 1); }
+  [data-flipped="true"] .camera-flip { transform: perspective(1400px) rotateY(180deg); }
+  [data-flipped="true"] .explore-hint { opacity: 0; pointer-events: none; }
+  .explore-hint { transition: opacity 300ms; }
+  .camera-front { position: relative; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .camera-back { position: absolute; inset: 0; transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden; container-type: size; border-radius: 16px; border: 1px solid #88888b; background: repeating-linear-gradient(90deg, #ffffff0a 0 1px, transparent 1px 3px), linear-gradient(250deg, #555558, #252527 6%, #222224 89%, #4c4c50 97%, #18181a); box-shadow: inset 0 2px 1px #d0d0d1, inset 3px 0 3px #85858b, inset -4px -3px 3px #070708; }
+  .lcd { position: absolute; left: 3%; top: 7%; width: 72%; height: 86%; overflow: hidden; border-radius: 5px; background: #020203; box-shadow: 0 0 0 3px #08080a, 0 0 0 4px #77777b, inset 0 0 10px #000; }
+  .lcd-album, .lcd figure { position: absolute; inset: 0; margin: 0; }
+  .lcd-album[hidden], .lcd figure[hidden] { display: none; }
+  .lcd img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .lcd figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 6px; font: 600 10px/1.2 ui-monospace, Menlo, monospace; letter-spacing: .4px; color: #fff; text-shadow: 0 1px 2px #000; background: linear-gradient(transparent, #0009); }
+  .osd { position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; gap: 8px; padding: 6px 8px 14px; font: 600 9px/1 ui-monospace, Menlo, monospace; letter-spacing: .6px; text-transform: uppercase; color: #fff; text-shadow: 0 1px 2px #000; background: linear-gradient(#0009, transparent); pointer-events: none; }
+  .lcd-menu { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 10px 12px; background: linear-gradient(#10243f, #07101e); }
+  .lcd-menu[hidden], .osd[hidden] { display: none; }
+  .lcd-menu p { margin: 0 0 4px; font: 600 9px/1 ui-monospace, Menlo, monospace; letter-spacing: 1px; text-transform: uppercase; color: #8fb4e8; }
+  .lcd-menu button { all: unset; cursor: pointer; box-sizing: border-box; display: flex; justify-content: space-between; gap: 8px; padding: 5px 8px; border-radius: 3px; font: 600 11px/1.2 ui-monospace, Menlo, monospace; color: #cfe0f7; }
+  .lcd-menu button[aria-current="true"] { background: linear-gradient(#f4a53a, #d9801a); color: #1a1000; }
+  .lcd-menu button:focus-visible { outline: 2px solid #fff; }
+  .menu-btn { all: unset; box-sizing: border-box; cursor: pointer; text-align: center; padding: 6px 4px; border-radius: 12px; border: 1px solid #0a0a0b; background: linear-gradient(#6a6a6e, #2f2f33); box-shadow: inset 0 1px 1px #c0c0c4, 0 1px 2px #000a; font: 700 clamp(7px, 2.2cqw, 9px)/1.2 Arial, sans-serif; letter-spacing: .6px; text-transform: uppercase; color: #e2e2e4; }
+  .menu-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .lcd-zoom { all: unset; position: absolute; inset: 0; cursor: zoom-in; }
+  .lcd-zoom[hidden] { display: none; }
+  .lcd-zoom:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
+  dialog { width: min(960px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 12px; border: 0; border-radius: 10px; background: #0b0b0c; color: #eee; text-align: center; overflow: hidden; }
+  dialog::backdrop { background: rgb(0 0 0 / .8); }
+  dialog img { display: block; max-width: 100%; max-height: calc(100dvh - 110px); margin: 0 auto; border-radius: 4px; }
+  .zoom-caption { margin: 10px 0 0; font: 12px/1.3 ui-monospace, Menlo, monospace; color: #bbb; }
+  .zoom-nav, .zoom-close { position: absolute; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #000a; color: #fff; font-size: 16px; }
+  .zoom-nav { top: 50%; transform: translateY(-50%); } .zoom-prev { left: 12px; } .zoom-next { right: 12px; }
+  .zoom-close { top: 12px; right: 12px; }
+  .lcd-glare { position: absolute; inset: 0; background: linear-gradient(120deg, #ffffff1c 0 22%, transparent 22.5%); pointer-events: none; }
+  .back-controls { position: absolute; left: 78%; top: 7%; width: 19%; height: 86%; display: flex; flex-direction: column; justify-content: space-between; align-items: stretch; }
+  .dpad { position: relative; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #77777b, #35353a 55%, #1b1b1d); box-shadow: 0 0 0 1px #0a0a0b, inset 0 1px 1px #c0c0c4, 0 2px 3px #000a; display: grid; grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr; }
+  .dpad button { all: unset; cursor: pointer; display: grid; place-items: center; font-size: clamp(7px, 2.4cqw, 10px); color: #d9d9dc; text-shadow: 0 1px #000; }
+  .dpad button:hover { color: #fff; }
+  .dpad button:focus-visible { outline: 2px solid var(--accent); border-radius: 50%; }
+  .dpad [data-nav="up"] { grid-area: 1 / 2; } .dpad [data-nav="left"] { grid-area: 2 / 1; } .dpad [data-nav="right"] { grid-area: 2 / 3; } .dpad [data-nav="down"] { grid-area: 3 / 2; }
+  .dpad .dpad-center { grid-area: 2 / 2; border-radius: 50%; font-size: clamp(5px, 1.7cqw, 7px); color: #aaa; background: radial-gradient(circle at 35% 30%, #5b5b60, #222225); box-shadow: 0 0 0 1px #0a0a0b; }
+  .flip-back { all: unset; box-sizing: border-box; cursor: pointer; text-align: center; padding: 8px 4px; border-radius: 12px; border: 1px solid #0a0a0b; background: linear-gradient(#6a6a6e, #2f2f33); box-shadow: inset 0 1px 1px #c0c0c4, 0 1px 2px #000a; font: 700 clamp(7px, 2.2cqw, 9px)/1.2 Arial, sans-serif; letter-spacing: .6px; text-transform: uppercase; color: #e2e2e4; }
+  .flip-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .back-print { position: absolute; left: 80%; top: 49%; font: italic 600 clamp(8px, 2.8cqw, 11px)/1 Arial, sans-serif; color: #8e8e92; letter-spacing: -.2px; }
+  @media (prefers-reduced-motion: reduce) { .camera-flip { transition: none; } }
   .camera-model { margin: 24px 0 0; font-size: 13px; line-height: 1.5; }
   .camera-model span { display: block; color: var(--muted); font-size: 11px; }
   .explore-hint { position: absolute; left: calc(100% + 12px); top: 30%; width: 128px; min-height: 44px; padding: 8px 0; background: none; border: 0; color: var(--accent); font-family: 'Caveat', cursive; font-size: 25px; font-weight: 500; line-height: 1.1; text-align: left; }
   .hint-arrow { position: absolute; left: -46px; top: 48px; width: 64px; height: 52px; overflow: visible; pointer-events: none; }
   .hint-arrow path { stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  dialog { width: min(900px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); padding: 32px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); box-shadow: 0 24px 80px rgb(0 0 0 / .2); overscroll-behavior: contain; }
-  dialog::backdrop { background: rgb(0 0 0 / .5); }
-  .explorer-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; padding-bottom: 12px; position: sticky; top: 0; z-index: 3; background: var(--paper); }
-  .album-eyebrow { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
-  .explorer-heading h2 { font-size: 26px; margin: 0; }
-  .explorer-close { flex: 0 0 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); color: var(--ink); position: sticky; top: 0; z-index: 2; }
-  .camera-credit { margin: 32px 0 0; color: var(--muted); font-size: 11px; }
   @media (max-width: 727px) {
     .explore-hint { position: relative; left: auto; top: auto; width: max-content; max-width: calc(100% - 48px); margin: 12px 0 0 auto; }
     .explore-hint br { display: none; }
@@ -194,7 +337,5 @@ import CameraPhotos from './CameraPhotos.astro';
     .cover-mp { font-size: 11px; }
     .zeiss small { font-size: 8px; margin-top: 2px; }
     .zoom-label { font-size: 6px; }
-    dialog { padding: 20px; }
-    .explorer-heading h2 { font-size: 22px; }
-  }
+      }
 </style>
