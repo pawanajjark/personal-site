@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import HotWheelsCollection from '../components/HotWheelsCollection.astro';
+import MachiavelliSticker from '../components/MachiavelliSticker.astro';
 import { formatDate, readingTime, type Post } from '../lib/posts';
 interface Props { post: Post }
 const { post } = Astro.props;
@@ -16,6 +17,10 @@ const listing = post.data.kind === 'note' ? '/notes/' : '/writing/';
     </header>
     {post.id === 'i-have-the-money-now' && <HotWheelsCollection />}
     <div class="prose"><slot /></div>
+    <div class="post-quote-row">
+      <blockquote class="post-quote"><p>{post.data.quote.text}</p><footer>— {post.data.quote.author}</footer></blockquote>
+      {post.data.quote.author === 'Niccolò Machiavelli' && <MachiavelliSticker />}
+    </div>
     <footer class="post-footer">
       {post.data.tags.length > 0 && <ul class="post-tags" aria-label="Topics">{post.data.tags.map(tag => <li><a href={`/topics/${tag}/`}>{tag}</a></li>)}</ul>}
       <a href={listing}>Back to {label.toLowerCase()} <span aria-hidden="true">→</span></a>
@@ -25,4 +30,9 @@ const listing = post.data.kind === 'note' ? '/notes/' : '/writing/';
 
 <style>
   .post-article { position: relative; }
+  .post-quote-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .post-quote-row :global(.sticker) { flex: none; width: 96px; transform: rotate(7deg); filter: drop-shadow(0 3px 4px rgb(0 0 0 / .3)); }
+  .post-quote { margin: 0; color: var(--muted); }
+  .post-quote p { margin: 0; font-size: 18px; font-style: italic; line-height: 1.5; }
+  .post-quote footer { margin-top: 8px; font-size: 13px; }
 </style>

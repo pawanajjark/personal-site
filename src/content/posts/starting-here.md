@@ -3,6 +3,9 @@ title: Starting here
 description: A place for life, work, and things I’m learning.
 date: 2026-11-01
 kind: writing
+quote:
+  text: "Whosoever desires constant success must change his conduct with the times."
+  author: Niccolò Machiavelli
 tags: [life, learning]
 ---
 

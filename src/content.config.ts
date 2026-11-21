@@ -10,6 +10,7 @@ const posts = defineCollection({
     date: z.coerce.date(),
     kind: z.enum(['writing', 'note']),
     tags: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).default([]),
+    quote: z.object({ text: z.string(), author: z.string() }),
     draft: z.boolean().default(false),
   }),
 });

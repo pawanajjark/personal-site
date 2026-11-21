@@ -3,6 +3,9 @@ title: What belongs here
 description: A few things I want to make room for on this site.
 date: 2026-11-01
 kind: note
+quote:
+  text: "Where the willingness is great, the difficulties cannot be great."
+  author: Niccolò Machiavelli
 tags: [life, work, learning]
 ---
 
