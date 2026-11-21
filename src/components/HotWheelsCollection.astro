@@ -18,10 +18,20 @@ const cars = [
 const floatingCars = cars.slice(0, 6);
 ---
 
+<svg class="car-filters" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="0" height="0">
+  <defs>
+    <!-- Knock out the near-white catalogue backdrop at render time, retaining the original photos. -->
+    <filter id="car-white-knockout" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -20 -20 -20 0 60" />
+      <feComposite in2="SourceGraphic" operator="in" />
+    </filter>
+  </defs>
+</svg>
+
 <aside class="collection-note" aria-label="My Hot Wheels collection">
-  <div class="sticker-field">
+  <div class="floating-cars">
     {floatingCars.map((car, index) => <button
-      class="sticker-button"
+      class="floating-car"
       type="button"
       data-open-collection
       aria-label={`See my collection, including ${car.name}`}
@@ -29,7 +39,7 @@ const floatingCars = cars.slice(0, 6);
       aria-controls="hot-wheels-gallery"
       style={`--tilt: ${[-11, 8, 6, -7, 12, -5][index]}deg; --duration: ${[12, 15, 11, 16, 13, 17][index]}s; --delay: ${-index * 1.7}s; --position: ${[0, 16, 36, 30, 72, 89][index]}%; --offset: ${[0, 12, 20, 0, 6, 18][index]}px;`}
     >
-      <span class="sticker">
+      <span class="car-cutout">
         <img src={`/images/hot-wheels/${car.id}.webp`} alt="" width="768" height="502" loading={index < 3 ? 'eager' : 'lazy'} />
         <span>{car.name}</span>
       </span>
@@ -66,14 +76,14 @@ const floatingCars = cars.slice(0, 6);
       const swapIndex = Math.floor(Math.random() * (index + 1));
       [shuffledCars[index], shuffledCars[swapIndex]] = [shuffledCars[swapIndex], shuffledCars[index]];
     }
-    document.querySelectorAll<HTMLButtonElement>('.sticker-button').forEach((sticker, index) => {
+    document.querySelectorAll<HTMLButtonElement>('.floating-car').forEach((opener, index) => {
       const car = shuffledCars[index];
-      const image = sticker.querySelector<HTMLImageElement>('img');
-      const caption = sticker.querySelector<HTMLElement>('.sticker > span');
+      const image = opener.querySelector<HTMLImageElement>('img');
+      const caption = opener.querySelector<HTMLElement>('.car-cutout > span');
       if (!car || !image || !caption) return;
       image.src = car.src;
       caption.textContent = car.alt;
-      sticker.setAttribute('aria-label', `See my collection, including ${car.alt}`);
+      opener.setAttribute('aria-label', `See my collection, including ${car.alt}`);
     });
     document.querySelectorAll('[data-open-collection]').forEach(opener => {
       opener.addEventListener('click', () => gallery.showModal());
@@ -90,15 +100,16 @@ const floatingCars = cars.slice(0, 6);
   .collection-note { margin: 0 0 40px; }
   button { font: inherit; color: inherit; cursor: pointer; }
   button:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
-  .sticker-field { position: relative; width: 260px; height: 190px; margin: 0 auto 12px; }
-  .sticker-button { position: absolute; width: 162px; padding: 0; background: none; border: 0; transform: rotate(var(--tilt)); }
-  .sticker { display: block; padding: 8px 8px 10px; background: #fff; color: #343630; border: 1px solid #e8e7e1; border-radius: 5px; box-shadow: 0 5px 16px rgb(0 0 0 / .10); }
-  .sticker img { display: block; width: 100%; height: 94px; object-fit: contain; }
-  .sticker > span { display: block; font-size: 11px; line-height: 1.4; margin-top: 4px; }
-  .sticker-button:nth-child(1) { left: 0; top: 2px; }
-  .sticker-button:nth-child(2) { right: 0; top: 12px; }
-  .sticker-button:nth-child(3) { left: 48px; top: 48px; }
-  .sticker-button:nth-child(n + 4) { display: none; }
+  .car-filters { position: absolute; pointer-events: none; }
+  .floating-cars { position: relative; width: 360px; max-width: 100%; height: 280px; margin: 0 auto 12px; }
+  .floating-car { position: absolute; width: 52%; padding: 0; background: none; border: 0; transform: rotate(var(--tilt)); }
+  .car-cutout { position: relative; display: block; }
+  .car-cutout img { display: block; width: 100%; height: auto; aspect-ratio: 1.7; object-fit: cover; filter: url(#car-white-knockout); }
+  .car-cutout > span { position: absolute; top: 100%; left: 0; right: 0; padding-top: 4px; color: var(--muted); font-size: var(--text-caption); line-height: 1.4; text-wrap: balance; }
+  .floating-car:nth-child(1) { left: 0; top: 2px; }
+  .floating-car:nth-child(2) { right: 0; top: 12px; }
+  .floating-car:nth-child(3) { left: 24%; top: 144px; }
+  .floating-car:nth-child(n + 4) { display: none; }
   .collection-copy { text-align: center; }
   .collection-caption { display: block; margin-top: 12px; font-size: 13px; color: var(--muted); }
   .collection-link { position: relative; display: inline-block; margin-top: 8px; min-height: 44px; padding: 8px; background: none; border: 0; font-family: 'Caveat', cursive; font-size: 25px; font-weight: 500; line-height: 1.1; color: var(--accent); }
@@ -120,12 +131,12 @@ const floatingCars = cars.slice(0, 6);
   .photo-credit { margin: 24px 0 0; font-size: 12px; color: var(--muted); }
   @media (min-width: 1280px) {
     .collection-note { position: absolute; inset: 190px 0 140px; margin: 0; pointer-events: none; }
-    .sticker-field { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; }
-    .sticker-button:nth-child(n) { display: block; top: var(--position); left: calc(100% + 40px + var(--offset)); right: auto; width: 162px; pointer-events: auto; animation: wander var(--duration) ease-in-out var(--delay) infinite; }
-    .sticker-button:nth-child(even) { left: auto; right: calc(100% + 40px + var(--offset)); }
-    .collection-copy { position: absolute; left: calc(100% + 32px); top: 150px; width: 190px; pointer-events: auto; }
-    .sticker-button:focus-visible { animation-play-state: paused; z-index: 1; }
-    .collection-note:has(~ dialog[open]) .sticker-button { animation-play-state: paused; }
+    .floating-cars { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; }
+    .floating-car:nth-child(n) { display: block; top: var(--position); left: calc(100% + 40px + var(--offset)); right: auto; width: 212px; pointer-events: auto; animation: wander var(--duration) ease-in-out var(--delay) infinite; }
+    .floating-car:nth-child(even) { left: auto; right: calc(100% + 40px + var(--offset)); }
+    .collection-copy { position: absolute; left: calc(100% + 32px); top: 184px; width: 212px; pointer-events: auto; }
+    .floating-car:focus-visible { animation-play-state: paused; z-index: 1; }
+    .collection-note:has(~ dialog[open]) .floating-car { animation-play-state: paused; }
   }
   @keyframes wander {
     0%, 100% { transform: translate(0, 0) rotate(var(--tilt)); }
@@ -134,7 +145,7 @@ const floatingCars = cars.slice(0, 6);
     80% { transform: translate(4px, 14px) rotate(calc(var(--tilt) + 1deg)); }
   }
   @media (hover: hover) and (pointer: fine) {
-    .sticker-button:hover { animation-play-state: paused; z-index: 1; }
+    .floating-car:hover { animation-play-state: paused; z-index: 1; }
   }
   @media (max-width: 480px) {
     dialog { padding: 20px; }
