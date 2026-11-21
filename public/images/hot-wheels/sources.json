@@ -1,0 +1,106 @@
+{
+  "retrieved": "2026-11-21",
+  "source": "HW Collectors Garage",
+  "usage": "Catalogue images illustrating matching releases in Pawan’s collection.",
+  "processing": "1280 × 1280 originals cropped to 768 × 502 to remove empty margins and encoded as WebP.",
+  "images": [
+    {
+      "id": "ferrari-f2004",
+      "page": "https://www.hwcgarage.com/en/vehicle/ferrari-f2004-2026-jjh51",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/87503/01_962cc4e1-64fa-430d-857a-257b7bbaee13.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "mad-manga",
+      "page": "https://www.hwcgarage.com/en/vehicle/mad-manga-2026-blanc-jjm10",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/93521/01_9ef5af18-dd50-43a9-9841-8129937738a8.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "ford-model-a",
+      "page": "https://www.hwcgarage.com/en/vehicle/ford-model-a-custom-31-2026-bleu-jjm11",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/93616/01_5f986942-877f-4cd6-a598-2abef91501de.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "vw-id-buzz-bomb",
+      "page": "https://www.hwcgarage.com/en/vehicle/vw-id-buzz-bomb-2026-bleu-jjl95",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/95089/01_5ebea954-d8dd-403f-b926-d0b713c53c3a.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "chevy-impala",
+      "page": "https://www.hwcgarage.com/en/vehicle/59-chevy-impala-2026-blanc-jjk81",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/96326/01_e147e7f6-6121-4ef4-a91b-9b269e16fb20.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "lotus-sport-elise",
+      "page": "https://www.hwcgarage.com/en/vehicle/lotus-sport-elise-2026-orange-jjk07",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/96174/01_04663905-ae81-48f5-9cb2-eded97925884.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "ultra-turbofire",
+      "page": "https://www.hwcgarage.com/en/vehicle/ultra-turbofire-2027-rouge-jnx31",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/122052/01_35df1ac0-bd2b-4816-8fe6-daed463f1777.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "morgan-super-3",
+      "page": "https://www.hwcgarage.com/en/vehicle/morgan-super-3-2026-jaune-jjl42",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/118994/01_56c8ec1c-09f7-4f1e-ab11-51a1748220bb.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "plymouth-road-runner",
+      "page": "https://www.hwcgarage.com/en/vehicle/1970-custom-plymouth-road-runner-2026-orange-jjk52",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94269/01_47c72ed5-8135-4ef0-af00-58837e872842.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "dark-knight-batmobile",
+      "page": "https://www.hwcgarage.com/en/vehicle/the-dark-knight-batmobile-2026-noir-jjl13",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94618/01_77ed14ea-80d0-4724-8c30-b2dab06d9949.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "nissan-maxima-drift",
+      "page": "https://www.hwcgarage.com/en/vehicle/nissan-maxima-drift-car-2026-noir-jjk53",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/96357/01_8844759d-0792-4095-96b8-8e2d78e7e292.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "haulerback",
+      "page": "https://www.hwcgarage.com/en/vehicle/haulerback-2026-rouge-jjl00",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/94060/01_c54872d0-d489-4f56-a504-53870b76cff7.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "dodge-viper-rt10",
+      "page": "https://www.hwcgarage.com/en/vehicle/92-dodge-viper-rt10-2024-jaune-htc24",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/80976/01_c38899b4-416e-4338-b1d4-4a30e3b3fe87.webp",
+      "width": 1280,
+      "height": 1280
+    },
+    {
+      "id": "custom-vanster",
+      "page": "https://www.hwcgarage.com/en/vehicle/custom-vanster-2026-gris-jjh79",
+      "image": "https://www.hwcgarage.com/_img/rs:fit:1280:1280/el:1/q:80/plain/s3://media-hwc/public/121505/01_e5580b9a-0f00-4879-9f3e-48ac718dce09.webp",
+      "width": 1280,
+      "height": 1280
+    }
+  ]
+}

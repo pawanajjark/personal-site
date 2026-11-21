@@ -1,0 +1,143 @@
+---
+const cars = [
+  { id: 'ferrari-f2004', name: 'Ferrari F2004', release: 'ferrari-f2004-2026-jjh51' },
+  { id: 'mad-manga', name: 'Mad Manga', release: 'mad-manga-2026-blanc-jjm10' },
+  { id: 'ford-model-a', name: 'Ford Model A Custom ’31', release: 'ford-model-a-custom-31-2026-bleu-jjm11' },
+  { id: 'vw-id-buzz-bomb', name: 'VW ID. Buzz Bomb', release: 'vw-id-buzz-bomb-2026-bleu-jjl95' },
+  { id: 'chevy-impala', name: '’59 Chevy Impala', release: '59-chevy-impala-2026-blanc-jjk81' },
+  { id: 'lotus-sport-elise', name: 'Lotus Sport Elise', release: 'lotus-sport-elise-2026-orange-jjk07' },
+  { id: 'ultra-turbofire', name: 'Ultra Turbofire', release: 'ultra-turbofire-2027-rouge-jnx31' },
+  { id: 'morgan-super-3', name: 'Morgan Super 3', release: 'morgan-super-3-2026-jaune-jjl42' },
+  { id: 'plymouth-road-runner', name: '1970 Custom Plymouth Road Runner', release: '1970-custom-plymouth-road-runner-2026-orange-jjk52' },
+  { id: 'dark-knight-batmobile', name: 'The Dark Knight Batmobile', release: 'the-dark-knight-batmobile-2026-noir-jjl13' },
+  { id: 'nissan-maxima-drift', name: 'Nissan Maxima Drift Car', release: 'nissan-maxima-drift-car-2026-noir-jjk53' },
+  { id: 'haulerback', name: 'Haulerback', release: 'haulerback-2026-rouge-jjl00' },
+  { id: 'dodge-viper-rt10', name: '’92 Dodge Viper RT/10', release: '92-dodge-viper-rt10-2024-jaune-htc24' },
+  { id: 'custom-vanster', name: 'Custom Vanster', release: 'custom-vanster-2026-gris-jjh79' },
+];
+const floatingCars = cars.slice(0, 6);
+---
+
+<aside class="collection-note" aria-label="My Hot Wheels collection">
+  <div class="sticker-field">
+    {floatingCars.map((car, index) => <button
+      class="sticker-button"
+      type="button"
+      data-open-collection
+      aria-label={`See my collection, including ${car.name}`}
+      aria-haspopup="dialog"
+      aria-controls="hot-wheels-gallery"
+      style={`--tilt: ${[-11, 8, 6, -7, 12, -5][index]}deg; --duration: ${[12, 15, 11, 16, 13, 17][index]}s; --delay: ${-index * 1.7}s; --position: ${[0, 16, 36, 30, 72, 89][index]}%; --offset: ${[0, 12, 20, 0, 6, 18][index]}px;`}
+    >
+      <span class="sticker">
+        <img src={`/images/hot-wheels/${car.id}.webp`} alt="" width="768" height="502" loading={index < 3 ? 'eager' : 'lazy'} />
+        <span>{car.name}</span>
+      </span>
+    </button>)}
+  </div>
+  <div class="collection-copy">
+    <button class="collection-link" type="button" data-open-collection aria-haspopup="dialog" aria-controls="hot-wheels-gallery"><svg class="collection-arrow" viewBox="0 0 80 64" fill="none" aria-hidden="true"><path d="M66 55C20 56 5 28 27 8M27 8L12 11M27 8L27 23" /></svg><span>Click to explore<br /> my collection</span></button>
+    <span class="collection-caption">A few of my 53 little cars</span>
+  </div>
+</aside>
+
+<dialog id="hot-wheels-gallery" aria-labelledby="collection-title">
+  <div class="gallery-heading">
+    <div>
+      <h2 id="collection-title">From my collection</h2>
+      <p>{cars.length} models from my collection of 53 Hot Wheels.</p>
+    </div>
+    <form method="dialog"><button class="gallery-close" aria-label="Close collection" autofocus>✕</button></form>
+  </div>
+  <div class="car-grid">
+    {cars.map(car => <figure>
+      <div class="car-image"><img src={`/images/hot-wheels/${car.id}.webp`} alt={car.name} width="768" height="502" loading="lazy" /></div>
+      <figcaption><a href={`https://www.hwcgarage.com/en/vehicle/${car.release}`} target="_blank" rel="noopener noreferrer">{car.name}</a></figcaption>
+    </figure>)}
+  </div>
+  <p class="photo-credit">Catalogue photos via <a href="https://www.hwcgarage.com/" target="_blank" rel="noopener noreferrer">HW Collectors Garage</a>.</p>
+</dialog>
+
+<script>
+  const gallery = document.querySelector<HTMLDialogElement>('#hot-wheels-gallery');
+  if (gallery) {
+    const shuffledCars = Array.from(gallery.querySelectorAll<HTMLImageElement>('.car-image img'));
+    for (let index = shuffledCars.length - 1; index > 0; index--) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [shuffledCars[index], shuffledCars[swapIndex]] = [shuffledCars[swapIndex], shuffledCars[index]];
+    }
+    document.querySelectorAll<HTMLButtonElement>('.sticker-button').forEach((sticker, index) => {
+      const car = shuffledCars[index];
+      const image = sticker.querySelector<HTMLImageElement>('img');
+      const caption = sticker.querySelector<HTMLElement>('.sticker > span');
+      if (!car || !image || !caption) return;
+      image.src = car.src;
+      caption.textContent = car.alt;
+      sticker.setAttribute('aria-label', `See my collection, including ${car.alt}`);
+    });
+    document.querySelectorAll('[data-open-collection]').forEach(opener => {
+      opener.addEventListener('click', () => gallery.showModal());
+    });
+    gallery.addEventListener('click', event => {
+      if (event.target !== gallery) return;
+      const bounds = gallery.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) gallery.close();
+    });
+  }
+</script>
+
+<style>
+  .collection-note { margin: 0 0 40px; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+  .sticker-field { position: relative; width: 260px; height: 190px; margin: 0 auto 12px; }
+  .sticker-button { position: absolute; width: 162px; padding: 0; background: none; border: 0; transform: rotate(var(--tilt)); }
+  .sticker { display: block; padding: 8px 8px 10px; background: #fff; color: #343630; border: 1px solid #e8e7e1; border-radius: 5px; box-shadow: 0 5px 16px rgb(0 0 0 / .10); }
+  .sticker img { display: block; width: 100%; height: 94px; object-fit: contain; }
+  .sticker > span { display: block; font-size: 11px; line-height: 1.4; margin-top: 4px; }
+  .sticker-button:nth-child(1) { left: 0; top: 2px; }
+  .sticker-button:nth-child(2) { right: 0; top: 12px; }
+  .sticker-button:nth-child(3) { left: 48px; top: 48px; }
+  .sticker-button:nth-child(n + 4) { display: none; }
+  .collection-copy { text-align: center; }
+  .collection-caption { display: block; margin-top: 12px; font-size: 13px; color: var(--muted); }
+  .collection-link { position: relative; display: inline-block; margin-top: 8px; min-height: 44px; padding: 8px; background: none; border: 0; font-family: 'Caveat', cursive; font-size: 25px; font-weight: 500; line-height: 1.1; color: var(--accent); }
+  .collection-arrow { position: absolute; left: -18px; top: -44px; width: 64px; height: 52px; overflow: visible; pointer-events: none; }
+  .collection-arrow path { stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  dialog { width: min(620px, calc(100% - 32px)); max-height: calc(100dvh - 48px); padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); box-shadow: 0 24px 80px rgb(0 0 0 / .2); overscroll-behavior: contain; }
+  dialog::backdrop { background: rgb(0 0 0 / .45); }
+  .gallery-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; padding-bottom: 12px; position: sticky; top: 0; z-index: 1; background: var(--paper); }
+  .gallery-heading h2 { font-size: 24px; margin: 0 0 8px; }
+  .gallery-heading p { font-size: 14px; color: var(--muted); margin: 0; }
+  .gallery-close { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: none; }
+  .car-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 12px; }
+  figure { margin: 0; min-width: 0; }
+  .car-image { overflow: hidden; background: #fff; border-radius: 4px; }
+  .car-image img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+  figcaption { margin-top: 8px; font-size: 12px; line-height: 1.5; }
+  figcaption a { text-decoration: none; }
+  figcaption a:hover { text-decoration: underline; }
+  .photo-credit { margin: 24px 0 0; font-size: 12px; color: var(--muted); }
+  @media (min-width: 1280px) {
+    .collection-note { position: absolute; inset: 190px 0 140px; margin: 0; pointer-events: none; }
+    .sticker-field { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; }
+    .sticker-button:nth-child(n) { display: block; top: var(--position); left: calc(100% + 40px + var(--offset)); right: auto; width: 162px; pointer-events: auto; animation: wander var(--duration) ease-in-out var(--delay) infinite; }
+    .sticker-button:nth-child(even) { left: auto; right: calc(100% + 40px + var(--offset)); }
+    .collection-copy { position: absolute; left: calc(100% + 32px); top: 150px; width: 190px; pointer-events: auto; }
+    .sticker-button:focus-visible { animation-play-state: paused; z-index: 1; }
+    .collection-note:has(~ dialog[open]) .sticker-button { animation-play-state: paused; }
+  }
+  @keyframes wander {
+    0%, 100% { transform: translate(0, 0) rotate(var(--tilt)); }
+    25% { transform: translate(7px, -12px) rotate(calc(var(--tilt) + 3deg)); }
+    55% { transform: translate(-8px, 6px) rotate(calc(var(--tilt) - 2deg)); }
+    80% { transform: translate(4px, 14px) rotate(calc(var(--tilt) + 1deg)); }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .sticker-button:hover { animation-play-state: paused; z-index: 1; }
+  }
+  @media (max-width: 480px) {
+    dialog { padding: 20px; }
+    .car-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>

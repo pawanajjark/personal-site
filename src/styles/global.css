@@ -1,5 +1,13 @@
 @import '@fontsource-variable/dm-sans';
 
+@font-face {
+  font-family: 'Caveat';
+  src: url('/fonts/caveat-medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
 :root {
   /* Follows the system until the header toggle sets data-theme. */
   color-scheme: light dark;

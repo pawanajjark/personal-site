@@ -1,0 +1,176 @@
+---
+import CameraPhotos from './CameraPhotos.astro';
+---
+
+<camera-explorer>
+  <aside class="camera-note" aria-label="Explore photos from my Sony Cybershot">
+    <div class="camera-control" style="--open: 0">
+      <div class="camera-object">
+        <div class="camera-top" aria-hidden="true"><span class="shutter"></span><span class="power-label">POWER</span><span class="power-light"></span><span class="top-model">DSC-T20</span></div>
+        <div class="camera-body">
+          <div class="lens-plate" aria-hidden="true">
+            <span class="zeiss">Carl Zeiss<small>Vario-Tessar</small></span>
+            <span class="flash"></span><span class="focus-lamp"></span>
+            <span class="zoom-label">3× OPTICAL ZOOM</span>
+            <span class="lens-housing"><span class="lens-ring"><span class="lens-glass"></span></span></span>
+          </div>
+          <span class="body-label" aria-hidden="true">8.1 MEGA PIXELS</span>
+          <button class="lens-cover" type="button" aria-haspopup="dialog" aria-controls="camera-albums-dialog" aria-label="Slide the cover down or press to switch on my Sony Cybershot and explore photos">
+            <span class="cover-edge" aria-hidden="true"></span><span class="sony-logo" aria-hidden="true">SONY</span><span class="cybershot-logo" aria-hidden="true">Cyber-shot</span><span class="cover-grip" aria-hidden="true"></span>
+          </button>
+        </div>
+        <input class="cover-slider" type="range" min="0" max="100" value="0" step="1" aria-label="Slide the lens cover down to explore photos" aria-controls="camera-albums-dialog" aria-orientation="vertical" />
+      </div>
+      <p class="camera-model">My Sony Cybershot<span>DSC-T20 · 2007</span></p>
+      <button class="explore-hint" type="button" data-camera-open aria-haspopup="dialog" aria-controls="camera-albums-dialog"><svg class="hint-arrow" viewBox="0 0 80 64" fill="none" aria-hidden="true"><path d="M68 8C73 37 43 59 10 37M10 37L13 52M10 37L26 36" /></svg><span>Click to explore<br /> my clicks</span></button>
+    </div>
+  </aside>
+
+  <dialog id="camera-albums-dialog" aria-labelledby="camera-albums-title">
+    <header class="explorer-heading">
+      <div><p class="album-eyebrow">Through my Cybershot</p><h2 id="camera-albums-title">Things I wanted to keep.</h2></div>
+      <button class="explorer-close" type="button" data-camera-close aria-label="Close photo albums" autofocus>✕</button>
+    </header>
+    <CameraPhotos />
+    <p class="camera-credit">All photographs in these albums are mine.</p>
+  </dialog>
+</camera-explorer>
+
+<script>
+  document.querySelectorAll('camera-explorer').forEach(explorer => {
+    const dialog = explorer.querySelector<HTMLDialogElement>('#camera-albums-dialog');
+    const slider = explorer.querySelector<HTMLInputElement>('.cover-slider');
+    const control = explorer.querySelector<HTMLElement>('.camera-control');
+    const cover = explorer.querySelector<HTMLButtonElement>('.lens-cover');
+    const body = explorer.querySelector<HTMLElement>('.camera-body');
+    if (!dialog || !slider || !control || !cover || !body) return;
+    let opened = false;
+    let dragStart: number | undefined;
+    let startValue = 0;
+    let moved = false;
+    let ignoreClick = false;
+    const setPosition = (value: number) => {
+      slider.value = String(Math.max(0, Math.min(100, value)));
+      control.style.setProperty('--open', String(Number(slider.value) / 100));
+    };
+    const open = () => {
+      if (opened) return;
+      opened = true;
+      setPosition(100);
+      const coverDuration = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300;
+      const lensPause = 250;
+      window.setTimeout(() => dialog.showModal(), coverDuration + lensPause);
+    };
+    cover.addEventListener('pointerdown', event => {
+      if (event.button !== 0 || opened) return;
+      dragStart = event.clientY;
+      startValue = Number(slider.value);
+      moved = false;
+      control.dataset.dragging = 'true';
+      cover.setPointerCapture(event.pointerId);
+    });
+    cover.addEventListener('pointermove', event => {
+      if (dragStart === undefined) return;
+      const distance = event.clientY - dragStart;
+      if (Math.abs(distance) > 4) moved = true;
+      setPosition(startValue + distance / (body.clientHeight * 0.30) * 100);
+    });
+    cover.addEventListener('pointerup', () => {
+      if (dragStart === undefined) return;
+      dragStart = undefined;
+      control.dataset.dragging = 'false';
+      ignoreClick = moved;
+      if (moved && Number(slider.value) >= 65) open();
+      else if (moved) setPosition(0);
+    });
+    cover.addEventListener('pointercancel', () => {
+      dragStart = undefined;
+      control.dataset.dragging = 'false';
+      setPosition(0);
+    });
+    cover.addEventListener('click', event => {
+      if (ignoreClick && event.detail !== 0) { ignoreClick = false; return; }
+      ignoreClick = false;
+      open();
+    });
+    explorer.querySelectorAll('[data-camera-open]').forEach(button => button.addEventListener('click', open));
+    explorer.querySelector('[data-camera-close]')?.addEventListener('click', () => dialog.close());
+    slider.addEventListener('input', () => {
+      setPosition(Number(slider.value));
+      if (Number(slider.value) >= 90) open();
+    });
+    slider.addEventListener('change', () => {
+      if (opened) return;
+      setPosition(0);
+    });
+    dialog.addEventListener('close', () => {
+      opened = false;
+      setPosition(0);
+    });
+    dialog.addEventListener('click', event => {
+      if (event.target !== dialog) return;
+      const bounds = dialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+    });
+  });
+</script>
+
+<style>
+  camera-explorer { display: block; }
+  .camera-note { width: 400px; max-width: calc(100% - 16px); margin: 60px auto 44px; }
+  .camera-control { position: relative; text-align: center; }
+  button { font: inherit; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+  .camera-object { position: relative; isolation: isolate; filter: drop-shadow(0 16px 14px rgb(0 0 0 / .18)); }
+  .camera-top { position: absolute; top: -7px; left: 3%; width: 94%; height: 18px; border: 1px solid #828286; border-radius: 12px 12px 0 0; background: linear-gradient(#d4d4d6, #77777b 45%, #c2c2c5 65%, #5d5d60); }
+  .shutter { position: absolute; left: 9%; top: -5px; width: 50px; height: 10px; background: linear-gradient(#eee, #9b9b9d 60%, #ddd); border: 1px solid #68686b; border-radius: 50%; box-shadow: 0 1px 1px #ffffffa0; }
+  .power-label { position: absolute; left: 38%; top: 0; font: 6px/10px Arial, sans-serif; letter-spacing: 1px; color: #38383c; }
+  .power-light { position: absolute; left: 53%; top: 3px; width: 5px; height: 3px; background: #a6e578; opacity: calc(.25 + var(--open) * .75); border-radius: 2px; }
+  .top-model { position: absolute; right: 9%; top: 0; font: 6px/10px Arial, sans-serif; color: #555; letter-spacing: .8px; }
+  .camera-body { position: relative; aspect-ratio: 1.61; border-radius: 16px; overflow: hidden; background: linear-gradient(110deg, #555558, #252527 6%, #222224 89%, #4c4c50 97%, #18181a); border: 1px solid #88888b; box-shadow: inset 0 2px 1px #d0d0d1, inset 3px 0 3px #85858b, inset -4px -3px 3px #070708; }
+  .lens-plate { position: absolute; left: 4%; right: 4%; top: 7%; height: 31%; border: 1px solid #69696e; border-radius: 8px; background: repeating-linear-gradient(0deg, #535354 0px, #555557 1px, #555557 2px, #505052 3px); box-shadow: inset 0 1px 1px #c6c6c9, 0 1px 2px #000a; }
+  .zeiss { position: absolute; top: 17%; left: 4%; font: 13px/1.25 Arial, sans-serif; color: #deded8; text-shadow: 0 1px #444; text-align: left; }
+  .zeiss small { display: block; font-size: 10px; margin-top: 4px; }
+  .flash { position: absolute; left: 44%; top: 15%; width: 20%; height: 22%; border: 2px solid #252527; border-radius: 4px; background: repeating-linear-gradient(90deg, #d4d2c9 0 2px, #adada7 2px 3px); box-shadow: 0 0 0 1px #999; }
+  .focus-lamp { position: absolute; left: 68%; top: 18%; width: 8px; height: 8px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #899486, #252d26 50%, #111); box-shadow: 0 0 0 2px #333, 0 0 0 3px #888; }
+  .zoom-label { position: absolute; left: 43%; bottom: 15%; font: 8px/1 Arial, sans-serif; color: #c3c3bc; letter-spacing: .3px; }
+  .lens-housing { position: absolute; top: 5%; right: 2%; width: 24%; height: 90%; border-radius: 7px; background: linear-gradient(135deg, #171719, #030304); box-shadow: inset 0 0 0 2px #444, 0 0 0 1px #777; display: grid; place-items: center; }
+  .lens-ring { width: 48px; height: 48px; max-width: 80%; max-height: 90%; aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle, #020708 44%, #292d2c 46%, #4c4f45 55%, #151819 57%, #30322c 68%, #111 70%); }
+  .lens-glass { width: 53%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(ellipse at 30% 25%, #7caaa0 0%, #264e44 16%, #081c1e 38%, #11111d 60%, #284134 78%, #05080a); box-shadow: inset 0 0 5px #000; }
+  .body-label { position: absolute; bottom: 10%; right: 8%; color: #969696; font: 7px Arial, sans-serif; letter-spacing: 1px; }
+  .lens-cover { position: absolute; left: 2.5%; top: 7%; width: 95%; height: 91%; padding: 0; border: 1px solid #4c4c50; border-top-color: #a4a4a7; border-radius: 9px 9px 12px 12px; background: linear-gradient(110deg, #363638 0%, #222224 18%, #18181a 60%, #252527 97%); transform: translateY(calc(var(--open) * 33%)); transition: transform 300ms cubic-bezier(.22, 1, .36, 1); box-shadow: 0 -3px 5px #0007, inset 1px 1px 1px #69696c, inset -2px -2px 4px #09090a; color: #ddd; touch-action: none; cursor: ns-resize; user-select: none; -webkit-user-select: none; }
+  .cover-edge { position: absolute; inset: 3px 6px auto; height: 1px; background: linear-gradient(90deg, transparent, #96969855, transparent); }
+  .sony-logo { position: absolute; right: 18%; top: 40%; font: 600 32px/1 Georgia, serif; letter-spacing: -.8px; text-shadow: 0 1px 1px #000; color: #dedee0; }
+  .cybershot-logo { position: absolute; left: 7%; bottom: 12%; font: 16px/1 Arial, sans-serif; letter-spacing: -.6px; color: #bebec2; }
+  .cover-grip { position: absolute; right: 7%; top: 10%; width: 26px; height: 3px; border-radius: 2px; background: #373739; box-shadow: 0 1px 0 #555558; }
+  [data-dragging="true"] .lens-cover { transition: none; }
+  .camera-body:has(.lens-cover:focus-visible), .camera-object:has(.cover-slider:focus-visible) { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 16px; }
+  .cover-slider { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .camera-model { margin: 24px 0 0; font-size: 13px; line-height: 1.5; }
+  .camera-model span { display: block; color: var(--muted); font-size: 11px; }
+  .explore-hint { position: absolute; left: calc(100% + 12px); top: 30%; width: 128px; min-height: 44px; padding: 8px 0; background: none; border: 0; color: var(--accent); font-family: 'Caveat', cursive; font-size: 25px; font-weight: 500; line-height: 1.1; text-align: left; }
+  .hint-arrow { position: absolute; left: -46px; top: 48px; width: 64px; height: 52px; overflow: visible; pointer-events: none; }
+  .hint-arrow path { stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  dialog { width: min(900px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); padding: 32px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink); box-shadow: 0 24px 80px rgb(0 0 0 / .2); overscroll-behavior: contain; }
+  dialog::backdrop { background: rgb(0 0 0 / .5); }
+  .explorer-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; padding-bottom: 12px; position: sticky; top: 0; z-index: 3; background: var(--paper); }
+  .album-eyebrow { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+  .explorer-heading h2 { font-size: 26px; margin: 0; }
+  .explorer-close { flex: 0 0 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); color: var(--ink); position: sticky; top: 0; z-index: 2; }
+  .camera-credit { margin: 32px 0 0; color: var(--muted); font-size: 11px; }
+  @media (max-width: 727px) {
+    .explore-hint { position: relative; left: auto; top: auto; width: max-content; max-width: calc(100% - 48px); margin: 12px 0 0 auto; }
+    .explore-hint br { display: none; }
+    .hint-arrow { left: -54px; top: -10px; transform: rotate(45deg); }
+  }
+  @media (max-width: 600px) {
+    .camera-note { margin-top: 48px; }
+    .sony-logo { font-size: clamp(22px, 7vw, 32px); }
+    .cybershot-logo { font-size: clamp(11px, 3vw, 16px); }
+    .zeiss { font-size: 10px; }
+    .zeiss small { font-size: 8px; margin-top: 2px; }
+    .zoom-label { font-size: 6px; }
+    dialog { padding: 20px; }
+    .explorer-heading h2 { font-size: 22px; }
+  }
+</style>

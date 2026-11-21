@@ -1,0 +1,72 @@
+---
+import ImageFan from './ImageFan.astro';
+import { cameraAlbums } from '../data/camera-photos';
+---
+
+<camera-albums class="camera-photos">
+  <nav class="album-nav" aria-label="Photo albums">
+    {cameraAlbums.map((album, index) => <button type="button" data-album-select={album.id} aria-controls={`camera-album-${album.id}`} aria-pressed={index === 0}>{album.title}</button>)}
+  </nav>
+  {cameraAlbums.map((album, index) => <section id={`camera-album-${album.id}`} data-album={album.id} hidden={index !== 0} aria-labelledby={`album-title-${album.id}`}>
+    <div class="album-heading"><h3 id={`album-title-${album.id}`}>{album.title}</h3><span>{album.photos.length} photos</span></div>
+    <ImageFan id={`cybershot-${album.id}`} items={album.photos} layout="grid" note="Taken with my Sony Cybershot DSC-T20." />
+  </section>)}
+</camera-albums>
+
+<script>
+  document.querySelectorAll('camera-albums').forEach(albums => {
+    const buttons = albums.querySelectorAll<HTMLButtonElement>('[data-album-select]');
+    buttons.forEach(button => button.addEventListener('click', () => {
+      buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      albums.querySelectorAll<HTMLElement>('[data-album]').forEach(panel => {
+        panel.hidden = panel.dataset.album !== button.dataset.albumSelect;
+      });
+      const dialog = albums.closest('dialog');
+      if (dialog) dialog.scrollTop = 0;
+    }));
+  });
+</script>
+
+<style>
+  .camera-photos { display: block; margin: 0; }
+  .album-nav { display: flex; gap: 8px; margin: -4px -4px 24px; padding: 4px; overflow-x: auto; scrollbar-width: thin; }
+  .album-nav button { flex-shrink: 0; white-space: nowrap; font: inherit; font-size: 13px; padding: 10px 12px; border: 1px solid var(--line); background: none; color: var(--muted); border-radius: 6px; cursor: pointer; }
+  .album-nav button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .album-nav button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .album-heading { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+  .album-heading h3 { font-size: 20px; margin: 0; }
+  .album-heading span { color: var(--muted); font-size: 12px; }
+  .camera-photos :global(.photo-grid) { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; padding: 8px 8px 16px; align-items: start; }
+  .camera-photos :global(.photo-link.landscape),
+  .camera-photos :global(.photo-link.photo-large),
+  .camera-photos :global(.photo-link) {
+    grid-column: auto;
+    padding: 10px 10px 20px;
+    background: #fff;
+    color: #343630;
+    border: 1px solid #e8e7e1;
+    border-radius: 3px;
+    box-shadow: 0 5px 16px rgb(0 0 0 / .10);
+    transform: rotate(var(--portrait-tilt, -3deg));
+    transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+  }
+  .camera-photos :global(.photo-link:nth-child(2)) { --portrait-tilt: 2deg; }
+  .camera-photos :global(.photo-link:nth-child(3)) { --portrait-tilt: -2deg; }
+  .camera-photos :global(.photo-link:nth-child(4)) { --portrait-tilt: 3deg; }
+  .camera-photos :global(.photo-link:nth-child(5)) { --portrait-tilt: -2.5deg; }
+  .camera-photos :global(.photo-link:nth-child(6)) { --portrait-tilt: 2.5deg; }
+  .camera-photos :global(.photo-grid .photo-link.landscape img) { aspect-ratio: 1; object-fit: cover; border-radius: 1px; }
+  .camera-photos :global(.photo-link span) { padding-top: 12px; font-size: 12px; color: #62645c; text-align: center; }
+  .camera-photos :global(.photo-link:focus-visible) { transform: translateY(-4px) rotate(0deg); }
+  @media (hover: hover) and (pointer: fine) {
+    .camera-photos :global(.photo-link:hover) { transform: translateY(-4px) rotate(0deg); box-shadow: 0 10px 22px rgb(0 0 0 / .14); }
+  }
+  @media (max-width: 480px) {
+    .camera-photos :global(.photo-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 18px; }
+    .camera-photos :global(.photo-link) { padding: 7px 7px 16px; }
+    .camera-photos :global(.photo-link span) { font-size: 11px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .camera-photos :global(.photo-link:is(:hover, :focus-visible)) { transform: rotate(var(--portrait-tilt, -3deg)); }
+  }
+</style>

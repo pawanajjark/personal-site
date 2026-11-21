@@ -5,7 +5,7 @@ interface Props {
   id?: string;
   note?: string;
   layout?: 'fan' | 'grid';
-  items: { src: ImageMetadata; title: string; alt: string }[];
+  items: { src: ImageMetadata; thumbnail?: ImageMetadata; title: string; alt: string }[];
 }
 const { id = 'visual-studies', items, note, layout = 'fan' } = Astro.props;
 if (!items.length || (layout === 'fan' && items.length !== 3)) throw new Error('ImageFan expects three images in a fan, or at least one in a grid.');
@@ -29,49 +29,35 @@ const galleryItems = items.map(item => {
       data-height={item.src.height}
       style={`--position:${index - 1};--angle:${(index - 1) * 10}deg;--drop:${index === 1 ? 0 : 14}px;--order:${index};--layer:${index === 1 ? 2 : 1};--photo-ratio:${item.src.width}/${item.src.height}`}
     >
-      <Image src={item.src} alt={item.alt} widths={layout === 'fan' ? [160, 320, 480] : [320, 480, 680, 960, 1360]} sizes={layout === 'fan' ? '(max-width: 600px) 112px, 176px' : item.landscape ? '(max-width: 728px) calc(100vw - 48px), 680px' : item.large ? '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 56vw, 387px' : '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 40vw, 269px'} loading={layout === 'fan' || index < 2 ? 'eager' : 'lazy'} />
+      <Image src={item.thumbnail ?? item.src} alt={item.alt} widths={layout === 'fan' ? [160, 320, 480] : [320, 480, 680, 960, 1360]} sizes={layout === 'fan' ? '(max-width: 600px) 112px, 176px' : item.landscape ? '(max-width: 728px) calc(100vw - 48px), 680px' : item.large ? '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 56vw, 387px' : '(max-width: 600px) calc(100vw - 48px), (max-width: 728px) 40vw, 269px'} loading={layout === 'fan' || index < 2 ? 'eager' : 'lazy'} />
       <span>{item.title}</span>
     </a>)}
   </div>
   <p class="fan-hint">Select a photo for a closer look.</p>
   <dialog aria-labelledby={`${id}-caption`}>
     <div class="lightbox-heading">
-      <p id={`${id}-caption`} data-caption>{items[0].title}</p>
+      <p id={`${id}-caption`} data-caption aria-live="polite" aria-atomic="true">{items[0].title}</p>
       <button type="button" data-close autofocus>Close</button>
     </div>
-    <img data-full-image src={items[0].src.src} alt={items[0].alt} width={items[0].src.width} height={items[0].src.height} />
+    <div class="lightbox-stage">
+      <img data-full-image src={items[0].src.src} alt={items[0].alt} width={items[0].src.width} height={items[0].src.height} draggable="false" />
+    </div>
+    <div class="lightbox-navigation" role="group" aria-label="Photo navigation" hidden={items.length < 2}>
+      <button type="button" data-previous aria-label="Previous photo"><span aria-hidden="true">←</span> Previous</button>
+      <span data-counter>1 / {items.length}</span>
+      <button type="button" data-next aria-label="Next photo">Next <span aria-hidden="true">→</span></button>
+    </div>
     {note && <p class="lightbox-note">{note}</p>}
   </dialog>
 </image-fan>
 
 <script>
+  import { setupImageViewer } from '../lib/image-viewer';
+
   class ImageFan extends HTMLElement {
     connectedCallback() {
       if (this.dataset.initialized) return;
-      const dialog = this.querySelector<HTMLDialogElement>('dialog');
-      const image = this.querySelector<HTMLImageElement>('[data-full-image]');
-      const caption = this.querySelector<HTMLElement>('[data-caption]');
-      if (!dialog || !image || !caption || typeof dialog.showModal !== 'function') return;
-      this.dataset.initialized = 'true';
-      this.querySelectorAll<HTMLAnchorElement>('.image-link').forEach(link => {
-        link.addEventListener('click', event => {
-          if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
-          event.preventDefault();
-          image.src = link.dataset.image ?? link.href;
-          image.alt = link.dataset.alt ?? '';
-          image.width = Number(link.dataset.width) || 600;
-          image.height = Number(link.dataset.height) || 800;
-          caption.textContent = link.dataset.title ?? '';
-          dialog.showModal();
-        });
-      });
-      this.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
-      dialog.addEventListener('click', event => {
-        if (event.target === dialog) {
-          const bounds = dialog.getBoundingClientRect();
-          if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
-        }
-      });
+      setupImageViewer(this);
       if (this.dataset.layout === 'fan' && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const observer = new IntersectionObserver(entries => {
           if (entries.some(entry => entry.isIntersecting)) {
@@ -154,7 +140,14 @@ const galleryItems = items.map(item => {
   button { min-height: 44px; padding: 8px 0 8px 12px; border: 0; background: transparent; color: var(--muted); font: inherit; font-size: var(--text-meta); cursor: pointer; }
   button:hover { color: var(--accent); }
   button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
-  [data-full-image] { display: block; max-width: 100%; max-height: min(65dvh, 640px); width: auto; height: auto; margin-inline: auto; border-radius: 4px; }
+  .lightbox-stage { position: relative; overflow: hidden; height: min(58dvh, 600px); display: flex; align-items: center; justify-content: center; touch-action: pan-y pinch-zoom; }
+  .lightbox-stage :global(.lightbox-outgoing) { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+  .lightbox-stage :global(.lightbox-outgoing img) { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 4px; }
+  [data-full-image] { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; margin-inline: auto; border-radius: 4px; user-select: none; -webkit-user-select: none; }
+  .lightbox-navigation { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; }
+  .lightbox-navigation[hidden] { display: none; }
+  .lightbox-navigation button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; min-width: 44px; border: 1px solid var(--line); border-radius: 6px; }
+  .lightbox-navigation [data-counter] { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .lightbox-note { color: var(--muted); font-size: var(--text-caption); text-align: center; margin: var(--space-4) 0 0; }
   @media (max-width: 600px) {
     .photo-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
