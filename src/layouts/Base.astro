@@ -29,6 +29,7 @@ const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/'
     <meta property="og:site_name" content={site.name} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <Analytics />
     <script is:inline>
       // Runs before paint so a saved theme never flashes the other one.
       (() => {
@@ -70,6 +71,5 @@ const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/'
         {site.links.length > 0 && <div>{site.links.map(link => <a href={link.href}>{link.label}</a>)}</div>}
       </footer>
     </div>
-    <Analytics />
   </body>
 </html>
