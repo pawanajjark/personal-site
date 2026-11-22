@@ -1,5 +1,6 @@
 ---
 import { site } from '../site.config';
+import Analytics from '@vercel/analytics/astro';
 import '../styles/global.css';
 interface Props { title?: string; description?: string; noindex?: boolean; type?: 'website' | 'article'; ogImage?: string; ogImageAlt?: string }
 const { title, description = site.description, noindex = false, type = 'website', ogImage = '/og.jpg', ogImageAlt = 'Pawan — I build software and explore ideas with AI tools.' } = Astro.props;
@@ -69,5 +70,6 @@ const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/'
         {site.links.length > 0 && <div>{site.links.map(link => <a href={link.href}>{link.label}</a>)}</div>}
       </footer>
     </div>
+    <Analytics />
   </body>
 </html>
