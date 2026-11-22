@@ -8,7 +8,7 @@ const { post } = Astro.props;
 const label = post.data.kind === 'note' ? 'Notes' : 'Writing';
 const listing = post.data.kind === 'note' ? '/notes/' : '/writing/';
 ---
-<Base title={post.data.title} description={post.data.description} type="article">
+<Base title={post.data.title} description={post.data.description} type="article" ogImage={post.data.ogImage} ogImageAlt={post.data.ogImageAlt}>
   <article class="post-article">
     <header class="post-header">
       <a class="back-link" href={listing}><span aria-hidden="true">←</span> {label}</a>

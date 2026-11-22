@@ -1,11 +1,11 @@
 ---
 import { site } from '../site.config';
 import '../styles/global.css';
-interface Props { title?: string; description?: string; noindex?: boolean; type?: 'website' | 'article' }
-const { title, description = site.description, noindex = false, type = 'website' } = Astro.props;
+interface Props { title?: string; description?: string; noindex?: boolean; type?: 'website' | 'article'; ogImage?: string; ogImageAlt?: string }
+const { title, description = site.description, noindex = false, type = 'website', ogImage = '/og.jpg', ogImageAlt = 'Pawan — I build software and explore ideas with AI tools.' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url);
 const configured = new URL(site.url).hostname !== 'example.com';
-const shareImage = new URL('/og.jpg', site.url);
+const shareImage = new URL(ogImage, site.url);
 const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/' }, { label: 'Notes', href: '/notes/' }, { label: 'About', href: '/about/' }];
 ---
 <!doctype html>
@@ -20,7 +20,7 @@ const nav = [{ label: 'Home', href: '/' }, { label: 'Writing', href: '/writing/'
     {(!configured || noindex || site.isPreview) && <meta name="robots" content="noindex, nofollow" />}
     {configured && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content={type} />
-    {configured && <><meta property="og:image" content={shareImage} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /></>}
+    {configured && <><meta property="og:image" content={shareImage} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /><meta property="og:image:alt" content={ogImageAlt} /><meta name="twitter:image" content={shareImage} /><meta name="twitter:image:alt" content={ogImageAlt} /></>}
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:title" content={title ?? site.title} />
     <meta property="og:description" content={description} />

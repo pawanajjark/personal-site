@@ -7,6 +7,8 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    ogImage: z.string().startsWith('/').optional(),
+    ogImageAlt: z.string().optional(),
     date: z.coerce.date(),
     kind: z.enum(['writing', 'note']),
     tags: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).default([]),
